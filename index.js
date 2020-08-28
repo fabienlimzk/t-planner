@@ -11,6 +11,7 @@ app.use(cors()); // allows all requests from outside servers or apps
 
 //== setup my routes
 app.use("/api/auth", require("./routes/auth.route"));
+app.use("/api/activities", require("./routes/activity.route"));
 
 //== 404 errors
 app.get("*", (req, res) => {
