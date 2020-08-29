@@ -10,6 +10,7 @@ app.use(express.json()); // allows me to receive JSON files from HEADER of REQUE
 app.use(cors()); // allows all requests from outside servers or apps
 
 //== setup my routes
+app.use("/api/auth", require("./routes/auth.route"));
 app.use("/api/activities", require("./routes/activity.route"));
 
 //== 404 errors
