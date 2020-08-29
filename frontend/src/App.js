@@ -8,45 +8,47 @@ import AddActivity from "./component/activities/AddActivity";
 
 const URL = process.env.REACT_APP_URL;
 export default class App extends Component {
-    state = {
-        activities: [],
-    };
+  state = {
+    activities: [],
+  };
 
-    fetchActivities = () => {
-        Axios.get(`${URL}/activities`)
-            .then((res) => {
-                // console.log(res.data);
-                this.setState({ activities: res.data.activities });
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    };
+  fetchActivities = () => {
+    Axios.get(`${URL}/activities`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ activities: res.data.activities });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    componentDidMount() {
-        this.fetchActivities();
-    }
+  componentDidMount() {
+    this.fetchActivities();
+  }
 
-    render() {
-        return (
-            <Router>
-                <Navigation />
-                <Switch>
-                    <Route
-                        path="/"
-                        exact
-                        render={() => (
-                            <Home activities={this.state.activities} />
-                        )}
-                    />
-                    <Route
-                        path="/activity/add"
-                        exact
-                        render={() => <AddActivity />}
-                    />
-                    <Route path="/activity/:id" component={Activity} />
-                </Switch>
-            </Router>
-        );
-    }
+  // delActivity = (id) => {
+  //   this.setState({
+  //     activities: [
+  //       ...this.state.activities.filter((activity) => activity.id !== id),
+  //     ],
+  //   });
+  // };
+
+  render() {
+    return (
+      <Router>
+        <Navigation />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => <Home activities={this.state.activities} />}
+          />
+          <Route path="/activity/add" exact render={() => <AddActivity />} />
+          <Route path="/activity/:id" component={Activity} />
+        </Switch>
+      </Router>
+    );
+  }
 }
