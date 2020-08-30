@@ -8,6 +8,8 @@ import Axios from "axios";
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
+import Trip from "./component/trips/Trip";
+import AddTrip from "./component/trips/AddTrip";
 
 import AllPackingLists from "./component/AllPackingLists";
 import PackingList from "./component/packingLists/PackingList";
@@ -18,6 +20,7 @@ export default class App extends Component {
   state = {
     activities: [],
     packingLists: [],
+    trips: [],
   };
 
   fetchActivities = () => {
@@ -42,9 +45,21 @@ export default class App extends Component {
       });
   };
 
+  fetchTrips = () => {
+    Axios.get(`${URL}/trips`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ trips: res.data.trips });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     this.fetchActivities();
     this.fetchPackingLists();
+    this.fetchTrips();
   }
 
   render() {
@@ -55,7 +70,7 @@ export default class App extends Component {
           <Route
             path="/"
             exact
-            render={() => <Home activities={this.state.activities} />}
+            render={() => <Home trips={this.state.trips} />}
           />
           <Route
             path="/activities"
@@ -78,6 +93,8 @@ export default class App extends Component {
             render={() => <AddPackingList />}
           />
           <Route path="/packingList/:id" component={PackingList} />
+          <Route path="/trip/add" exact render={() => <AddTrip />} />
+          <Route path="/trip/:id" component={Trip} />
         </Switch>
       </Router>
     );

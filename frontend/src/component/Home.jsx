@@ -42,31 +42,20 @@ export default class Home extends Component {
   }
 
   render() {
-    // console.log(this.props.activities);
+    console.log(this.props.activities);
     return (
       <div>
         <h1>Home</h1>
         <Container fluid>
           <Row>
-            {this.props.activities.map((activity) => (
-              <Col key={activity._id} md="3">
+            {this.props.trips.map((trip) => (
+              <Col key={trip._id} md="3">
                 <Card>
                   <Card.Body>
-                    <Card.Img variant="top" src={activity.image_url} />
+                    {trip.title}
+                    {trip.description}
                     <div>
-                      <Link to={`/activity/${activity._id}`}>
-                        {activity.title}
-                        <br />
-                        <Button
-                          onClick={this.deleteActivity}
-                          variant="danger"
-                          id={activity._id}
-                          style={{ float: "right" }}
-                        >
-                          Delete
-                        </Button>
-                      </Link>
-                      {activity.description} <br />
+                      <Link to={`/trip/${trip._id}`}>See trip</Link>
                     </div>
                   </Card.Body>
                 </Card>
