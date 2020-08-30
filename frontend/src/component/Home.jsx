@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 const URL = process.env.REACT_APP_URL;
-
 export default class Home extends Component {
   state = {
-    activities: [],
+    trips: [],
   };
-  fetchActivities = () => {
-    //   // let token = localStorage.getActivity("token");
+  fetchTrips = () => {
+    //   // let token = localStorage.getTrip("token");
     Axios.get(
-      `${URL}/activities`
+      `${URL}/trips`
       // , {
       //     headers: {
       //       "x-auth-token": token,
@@ -29,44 +27,30 @@ export default class Home extends Component {
         console.log(err);
       });
   };
-
-  deleteActivity = (e) => {
+  deleteTrip = (e) => {
     console.log(e.target.id);
-    Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-      this.fetchActivities();
+    Axios.delete(`${URL}/trips/${e.target.id}`).then((res) => {
+      this.fetchTrips();
     });
   };
-
   componentDidMount() {
-    this.fetchActivities();
+    this.fetchTrips();
   }
-
   render() {
-    // console.log(this.props.activities);
+    // console.log(this.props.trips);
     return (
       <div>
         <h1>Home</h1>
         <Container fluid>
           <Row>
-            {this.props.activities.map((activity) => (
-              <Col key={activity._id} md="3">
+            {this.props.trips.map((trip) => (
+              <Col key={trip._id} md="3">
                 <Card>
                   <Card.Body>
-                    <Card.Img variant="top" src={activity.image_url} />
+                    {trip.title}
+                    {trip.description}
                     <div>
-                      <Link to={`/activity/${activity._id}`}>
-                        {activity.title}
-                        <br />
-                        <Button
-                          onClick={this.deleteActivity}
-                          variant="danger"
-                          id={activity._id}
-                          style={{ float: "right" }}
-                        >
-                          Delete
-                        </Button>
-                      </Link>
-                      {activity.description} <br />
+                      <Link to={`/trip/${trip._id}`}>See trip</Link>
                     </div>
                   </Card.Body>
                 </Card>

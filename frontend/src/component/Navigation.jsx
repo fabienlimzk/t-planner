@@ -14,7 +14,7 @@ function Navigation() {
 
                     <Nav.Link href="/packingLists">Packing List</Nav.Link>
                     <Nav.Link href="/packingList/add">Add Packing List</Nav.Link>
-                    {/* <Nav.Link href="#trips">Trip</Nav.Link> */}
+                    <Nav.Link href="/trip/add">Add Trip</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

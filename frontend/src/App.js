@@ -8,6 +8,8 @@ import Axios from "axios";
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
+import Trip from "./component/trips/Trip";
+import AddTrip from "./component/trips/AddTrip";
 
 import AllPackingLists from "./component/AllPackingLists";
 import PackingList from "./component/packingLists/PackingList";
@@ -17,6 +19,8 @@ const URL = process.env.REACT_APP_URL;
 export default class App extends Component {
   state = {
     activities: [],
+
+    trips: [],
     packingLists: [],
   };
 
@@ -31,11 +35,24 @@ export default class App extends Component {
       });
   };
 
+
+  fetchTrips = () => {
+    Axios.get(`${URL}/trips`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ trips: res.data.trips });
+})
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   fetchPackingLists = () => {
     Axios.get(`${URL}/packingLists`)
       .then((res) => {
         // console.log(res.data);
         this.setState({ packingLists: res.data.packingLists });
+
       })
       .catch((err) => {
         console.log(err);
@@ -44,7 +61,10 @@ export default class App extends Component {
 
   componentDidMount() {
     this.fetchActivities();
+  this.fetchTrips();
+
     this.fetchPackingLists();
+
   }
 
   render() {
@@ -55,6 +75,18 @@ export default class App extends Component {
           <Route
             path="/"
             exact
+            render={() => (
+              <Home
+                activities={this.state.activities}
+                trips={this.state.trips}
+              />
+            )}
+          />
+          <Route path="/activity/add" exact render={() => <AddActivity />} />
+          <Route path="/activity/:id" component={Activity} />
+          <Route path="/trip/add" exact render={() => <AddTrip />} />
+          <Route path="/trip/:id" component={Trip} />
+
             render={() => <Home activities={this.state.activities} />}
           />
           <Route
@@ -78,6 +110,7 @@ export default class App extends Component {
             render={() => <AddPackingList />}
           />
           <Route path="/packingList/:id" component={PackingList} />
+
         </Switch>
       </Router>
     );
