@@ -20,31 +20,38 @@ export default class Activity extends Component {
       });
   };
 
-  // fetchActivities = () => {
-  //   // let token = localStorage.getItem("token");
-  //   Axios.get(`${URL}/activities`, {
-  //     // headers: {
-  //       // "x-auth-token": token,
-  //     // },
-  //   })
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       // if (this.mounted) {
-  //       this.setState({ items: res.data.items });
-  //       // }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  fetchActivities = () => {
+    // let token = localStorage.getActivity("token");
+    Axios.get(
+      `${URL}/activities`
+      // , {
+      // headers: {
+      // "x-auth-token": token,
+      // },
+      // }
+    )
+      .then((res) => {
+        // console.log(res.data);
+        // if (this.mounted) {
+        this.setState({ activities: res.data.activities });
+        // }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   deleteActivity = (e) => {
-    console.log("trying to delete"); 
-    Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-      console.log("deleted"); 
-      // this.fetchActivities();
-    });
+    // this.props.deleteActivity(e.target.id);
+    console.log(this.props); 
   };
+  // deleteActivity = (e) => {
+  //   console.log("trying to delete");
+  //   Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
+  //     console.log("deleted");
+  //     this.fetchActivities();
+  //   });
+  // };
 
   getActivity = () => {
     Axios.get(`${URL}/activities/${this.props.match.params.id}`)
@@ -97,12 +104,4 @@ export default class Activity extends Component {
   }
 }
 
-const btnStyle = {
-  background: "#ff0000",
-  color: "#fff",
-  border: "none",
-  padding: "5px 10px",
-  // borderRadius: "50%",
-  cursor: "pointer",
-  // float: "right",
-};
+

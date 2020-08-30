@@ -5,14 +5,15 @@ import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 
-export default class Home extends Component {
+export default class AllPackingLists extends Component {
   state = {
-    activities: [],
+    packingList: [],
   };
-  fetchActivities = () => {
-    //   // let token = localStorage.getActivity("token");
+
+  fetchPackingLists = () => {
+    //   // let token = localStorage.getPackingList("token");
     Axios.get(
-      `${URL}/activities`
+      `${URL}/packingLists`
       // , {
       //     headers: {
       //       "x-auth-token": token,
@@ -22,7 +23,7 @@ export default class Home extends Component {
       .then((res) => {
         //       // console.log(res.data
         //       // if (this.mounted) {
-        this.setState({ activities: res.data.activities });
+        this.setState({ packingLists: res.data.packingLists });
         //       // }
       })
       .catch((err) => {
@@ -30,43 +31,42 @@ export default class Home extends Component {
       });
   };
 
-  deleteActivity = (e) => {
+  deletePackingList = (e) => {
     console.log(e.target.id);
-    Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-      this.fetchActivities();
+    Axios.delete(`${URL}/packingLists/${e.target.id}`).then((res) => {
+      this.fetchPackingLists();
     });
   };
 
   componentDidMount() {
-    this.fetchActivities();
+    this.fetchPackingLists();
   }
 
   render() {
-    // console.log(this.props.activities);
+    // console.log(this.props.packingLists);
     return (
       <div>
-        <h1>Home</h1>
+        <h1>Packing List</h1>
         <Container fluid>
           <Row>
-            {this.props.activities.map((activity) => (
-              <Col key={activity._id} md="3">
+            {this.props.packingLists.map((packingList) => (
+              <Col key={packingList._id} md="3">
                 <Card>
                   <Card.Body>
-                    <Card.Img variant="top" src={activity.image_url} />
                     <div>
-                      <Link to={`/activity/${activity._id}`}>
-                        {activity.title}
+                      <Link to={`/packingList/${packingList._id}`}>
+                        {packingList.title}
                         <br />
                         <Button
-                          onClick={this.deleteActivity}
+                          onClick={this.deletePackingList}
                           variant="danger"
-                          id={activity._id}
+                          id={packingList._id}
                           style={{ float: "right" }}
                         >
                           Delete
                         </Button>
                       </Link>
-                      {activity.description} <br />
+                      {packingList.item} <br />
                     </div>
                   </Card.Body>
                 </Card>
