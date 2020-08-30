@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 
-export default class Home extends Component {
+export default class AllActivities extends Component {
   state = {
     activities: [],
   };
@@ -45,7 +45,7 @@ export default class Home extends Component {
     // console.log(this.props.activities);
     return (
       <div>
-        <h1>Home</h1>
+        <h1>Activity</h1>
         <Container fluid>
           <Row>
             {this.props.activities.map((activity) => (

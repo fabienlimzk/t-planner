@@ -1,14 +1,20 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const activitySchema = new mongoose.Schema({
+const activitySchema = new mongoose.Schema(
+  {
+    title: String,
+    start_date: Date,
+    end_date: Date,
+    duration: String,
+    address: String,
     description: String,
-    start_date: String,
-    end_date: String,
-    no_of_days: Number
-}, {
-    timestamps: true
-})
+    image_url: String,
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const Activity = mongoose.model("Activity", activitySchema)
+const Activity = mongoose.model("Activity", activitySchema);
 
-module.exports = Activity
+module.exports = Activity;
