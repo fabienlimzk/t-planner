@@ -1,17 +1,17 @@
 const router = require("express").Router();
-const Activity = require("../model/activity.model");
+const PackingList = require("../model/packingList.model");
 
 /* 
-    @route GET api/activities/:id
-    @desc Gets one activity
+    @route GET api/packingLists/:id
+    @desc Gets one packingList
     @access public
 */
 router.get("/:id", async (req, res) => {
   try {
-    let activity = await Activity.findById(req.params.id);
+    let packingList = await PackingList.findById(req.params.id);
     res.status(200).json({
       message: "get works",
-      activity,
+      packingList,
     });
   } catch (err) {
     res.status(500).json({
@@ -21,15 +21,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 /* 
-    @route PUT api/activities/:id
-    @desc updates one activity
+    @route PUT api/packingLists/:id
+    @desc updates one packingList
     @access public
 */
 router.put("/:id", async (req, res) => {
   try {
-    let activity = await Activity.findByIdAndUpdate(req.params.id, req.body);
+    let packingList = await PackingList.findByIdAndUpdate(req.params.id, req.body);
 
-    if (activity) {
+    if (packingList) {
       res.status(200).json({
         message: "put works",
       });
@@ -43,15 +43,15 @@ router.put("/:id", async (req, res) => {
 });
 
 /* 
-    @route DELETE api/activities/:id
-    @desc deletes one activity
+    @route DELETE api/packingLists/:id
+    @desc deletes one packingList
     @access public
 */
 router.delete("/:id", async (req, res) => {
   try {
-    let activityDelete = await Activity.findByIdAndDelete(req.params.id);
+    let packingListDelete = await PackingList.findByIdAndDelete(req.params.id);
 
-    if (activityDelete) {
+    if (packingListDelete) {
       res.status(200).json({
         message: "delete works",
       });
@@ -65,15 +65,15 @@ router.delete("/:id", async (req, res) => {
 });
 
 /* 
-    @route POST api/activities
-    @desc Gets all activities
+    @route POST api/packingLists
+    @desc Gets all packingLists
     @access public
 */
 router.post("/", async (req, res) => {
   try {
-    let activity = new Activity(req.body);
+    let packingList = new PackingList(req.body);
 
-    let savedactivity = await activity.save();
+    let savedpackingList = await packingList.save();
 
     res.status(201).json({
       message: "post works",
@@ -86,18 +86,18 @@ router.post("/", async (req, res) => {
   }
 });
 /* 
-@route GET api/activities
-@desc Gets all activities
+@route GET api/packingLists
+@desc Gets all packingLists
 @access public
 */
 router.get("/", async (req, res) => {
   try {
-    let activities = await Activity.find();
+    let packingLists = await PackingList.find();
 
     res.status(200).send({
       message: "get all works",
-      count: activities.length,
-      activities,
+      count: packingLists.length,
+      packingLists,
     });
   } catch (error) {
     res.status(500).json({
