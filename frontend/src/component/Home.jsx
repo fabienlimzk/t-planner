@@ -2,17 +2,15 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
 const URL = process.env.REACT_APP_URL;
-
 export default class Home extends Component {
   state = {
-    activities: [],
+    trips: [],
   };
-  fetchActivities = () => {
-    //   // let token = localStorage.getActivity("token");
+  fetchTrips = () => {
+    //   // let token = localStorage.getTrip("token");
     Axios.get(
-      `${URL}/activities`
+      `${URL}/trips`
       // , {
       //     headers: {
       //       "x-auth-token": token,
@@ -29,20 +27,21 @@ export default class Home extends Component {
         console.log(err);
       });
   };
-
-  deleteActivity = (e) => {
+  deleteTrip = (e) => {
     console.log(e.target.id);
-    Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-      this.fetchActivities();
+    Axios.delete(`${URL}/trips/${e.target.id}`).then((res) => {
+      this.fetchTrips();
     });
   };
-
   componentDidMount() {
-    this.fetchActivities();
+    this.fetchTrips();
   }
-
   render() {
+<<<<<<< HEAD
     console.log(this.props.activities);
+=======
+    // console.log(this.props.trips);
+>>>>>>> 230be8fb23dd5ce077954a8408c74195937389ed
     return (
       <div>
         <h1>Home</h1>
