@@ -23,11 +23,7 @@ class EditTrip extends Component {
 
     return (
       <div>
-<<<<<<< HEAD
         <h1>Edit Trip</h1>
-=======
-        <h1>Add Trip</h1>
->>>>>>> 230be8fb23dd5ce077954a8408c74195937389ed
         <div>
           <Row>
             Title of Trip:

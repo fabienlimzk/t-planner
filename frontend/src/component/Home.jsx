@@ -37,11 +37,7 @@ export default class Home extends Component {
     this.fetchTrips();
   }
   render() {
-<<<<<<< HEAD
-    console.log(this.props.activities);
-=======
     // console.log(this.props.trips);
->>>>>>> 230be8fb23dd5ce077954a8408c74195937389ed
     return (
       <div>
         <h1>Home</h1>

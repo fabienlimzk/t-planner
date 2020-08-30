@@ -11,8 +11,6 @@ function Navigation() {
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/activities">Activities</Nav.Link>
           <Nav.Link href="/activity/add">Add Activity</Nav.Link>
-
-<<<<<<< HEAD
           <Nav.Link href="/packingLists">Packing List</Nav.Link>
           <Nav.Link href="/packingList/add">Add Packing List</Nav.Link>
           <Nav.Link href="/trip/add">Add Trip</Nav.Link>
@@ -20,15 +18,6 @@ function Navigation() {
       </Navbar.Collapse>
     </Navbar>
   );
-=======
-                    <Nav.Link href="/packingLists">Packing List</Nav.Link>
-                    <Nav.Link href="/packingList/add">Add Packing List</Nav.Link>
-                    <Nav.Link href="/trip/add">Add Trip</Nav.Link>
-                </Nav>
-            </Navbar.Collapse>
-        </Navbar>
-    );
->>>>>>> 230be8fb23dd5ce077954a8408c74195937389ed
 }
 
 export default Navigation;
