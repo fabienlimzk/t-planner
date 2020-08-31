@@ -1,3 +1,6 @@
+
+//  AIzaSyBXtcOE6arcwH0cfCad4ae3wkRLGKW9nQs API KEY
+
 import React, { Component } from "react";
 import {
   Switch,
@@ -5,14 +8,18 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import Axios from "axios";
 import Home from "./component/Home";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import Navigation from "./component/Navigation";
-import Axios from "axios";
+import { MapContainer } from "./component/map/MapContainer";
+
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
+
 import Trip from "./component/trips/Trip";
 import AddTrip from "./component/trips/AddTrip";
 import AllPackingLists from "./component/AllPackingLists";
@@ -23,6 +30,7 @@ import PrivateRoute from "./component/PrivateRoute";
 import { Alert } from "react-bootstrap";
 
 const URL = process.env.REACT_APP_URL;
+
 export default class App extends Component {
   state = {
     // activities: [],
@@ -173,6 +181,10 @@ export default class App extends Component {
             exact
             render={() => <Register register={this.registerHandler} />}
           />
+          <Route path="/activities" exact render={() => <AllActivities />} />
+          <Route path="/activity/add" exact render={() => <AddActivity />} />
+          <Route path="/activity/:id" component={Activity} />
+          <MapContainer />
           <Route
             path="/login"
             exact
