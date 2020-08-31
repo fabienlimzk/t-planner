@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Container } from "react-bootstrap";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
+
 const URL = process.env.REACT_APP_URL;
 
 export default class AddPackingList extends Component {
   state = {
+    title: "",
     items: [],
+    status: false,
   };
 
-  changeHandler = (e, index) => {
-    // this.setState({ [e.target.name]: e.target.value });
+  titleChangeHandler = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  itemChangeHandler = (e, index) => {
     this.state.items[index] = e.target.value;
     this.setState({ items: this.state.items });
   };
@@ -24,7 +31,8 @@ export default class AddPackingList extends Component {
     console.log(this.state);
     Axios.post(`${URL}/packingLists`, this.state)
       .then((res) => {
-        // console.log("done");
+        console.log("done");
+        this.setState({ status: true });
       })
       .catch((err) => {
         console.log(err);
@@ -36,26 +44,43 @@ export default class AddPackingList extends Component {
   };
 
   render() {
+    let { title, items } = this.state;
+
+    if (this.state.status) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <Container>
           <h1>Add Item</h1>
-          {this.state.items.map((item, index) => (
-            <Row key={index}>
-              <Form.Control
-                name="items"
-                value={item}
-                placeholder="FlipFlops"
-                onChange={(e) => this.changeHandler(e, index)}
-              />
-              <Button
-                variant="danger"
-                onClick={() => this.removeHandler(index)}
-              >
-                Remove
-              </Button>
-            </Row>
-          ))}
+          <Row>
+            Title:
+            <Form.Control
+              name="title"
+              value={title}
+              placeholder="Summer"
+              onChange={this.titleChangeHandler}
+            />
+          </Row>
+          <div>
+            {items.map((item, index) => (
+              <Row key={index}>
+                <Form.Control
+                  name="items"
+                  value={item}
+                  placeholder="FlipFlops"
+                  onChange={(e) => this.itemChangeHandler(e, index)}
+                />
+                <Button
+                  variant="danger"
+                  onClick={() => this.removeHandler(index)}
+                >
+                  Remove
+                </Button>
+              </Row>
+            ))}
+          </div>
 
           <Button onClick={(e) => this.addItem(e)}>Add more item</Button>
           <Button onClick={this.submitHandler}>Submit</Button>

@@ -9,6 +9,7 @@ export default class AllActivities extends Component {
   state = {
     activities: [],
   };
+
   fetchActivities = () => {
     //   // let token = localStorage.getActivity("token");
     Axios.get(
@@ -31,17 +32,19 @@ export default class AllActivities extends Component {
   };
 
   deleteActivity = (e) => {
-    const id = e.target.id 
+    const id = e.target.id;
     // console.log(e.target.id);
-    Axios.delete(`${URL}/activities/${id}`).then(() => {
-      let activities = this.state.activities.filter(activity => activity._id !== id)
-      // console.log(activities);
-      this.setState({activities});
-    })
-    .catch((err)=>{
-      console.log(err);
-    })
-    ;
+    Axios.delete(`${URL}/activities/${id}`)
+      .then(() => {
+        let activities = this.state.activities.filter(
+          (activity) => activity._id !== id
+        );
+        // console.log(activities);
+        this.setState({ activities });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   componentDidMount() {
@@ -52,28 +55,30 @@ export default class AllActivities extends Component {
     // console.log(this.props.activities);
     return (
       <div>
-        <h1>Activity</h1>
+        <h1>Activities</h1>
         <Container fluid>
           <Row>
             {this.state.activities.map((activity) => (
               <Col key={activity._id} md="3">
                 <Card>
                   <Card.Body>
-                    <Card.Img variant="top" src={activity.image_url} />
                     <div>
-                      <Link to={`/activity/${activity._id}`}>
-                        {activity.title}
-                        <br />
-                      </Link>
-                        <Button
-                          onClick={this.deleteActivity}
-                          variant="danger"
-                          id={activity._id}
-                          style={{ float: "right" }}
-                        >
-                          Delete
-                        </Button>
-                      {activity.description} <br />
+                      <Card.Img variant="top" src={activity.image_url} />
+                    </div>
+                    <div>{activity.title}</div>
+                    <div>{activity.description}</div>
+                    <div>
+                      <Link to={`/activity/${activity._id}`}>View</Link>
+
+                      <Button
+                        onClick={this.deleteActivity}
+                        variant="danger"
+                        id={activity._id}
+                        size="sm"
+                        style={{ float: "right" }}
+                      >
+                        Delete
+                      </Button>
                     </div>
                   </Card.Body>
                 </Card>

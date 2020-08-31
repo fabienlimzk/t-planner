@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const packingListSchema = new mongoose.Schema(
   {
+    title: String,
     items: [String],
   },
   {

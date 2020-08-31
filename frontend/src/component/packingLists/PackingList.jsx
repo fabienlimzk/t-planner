@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import EditPackingList from "./EditPackingList";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, ListGroup } from "react-bootstrap";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -81,8 +81,15 @@ export default class PackingList extends Component {
           <h1>Packing List</h1>
           {packingList ? (
             <div>
+              <h3>{packingList.title}</h3>
               {packingList.items.map((item, index) => (
-                <li key={index}>{item}</li>
+                <div>
+                  <ListGroup>
+                    <ListGroup.Item as="li" key={index}>
+                      {item}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </div>
               ))}
               <Button onClick={this.showEdit}>Edit Packing List</Button>
               {edit && (

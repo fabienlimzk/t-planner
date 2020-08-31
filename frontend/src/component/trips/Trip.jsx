@@ -27,6 +27,27 @@ export default class Trip extends Component {
       });
   };
 
+  fetchTrips = () => {
+    // let token = localStorage.getTrip("token");
+    Axios.get(
+      `${URL}/trips`
+      // , {
+      // headers: {
+      // "x-auth-token": token,
+      // },
+      // }
+    )
+      .then((res) => {
+        // console.log(res.data);
+        // if (this.mounted) {
+        this.setState({ trips: res.data.trips });
+        // }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   getTrip = () => {
     Axios.get(`${URL}/trips/${this.props.match.params.id}`)
       .then((res) => {
@@ -54,6 +75,7 @@ export default class Trip extends Component {
                 <h3>{trip.title}</h3>
               </div>
               <div>{trip.description}</div>
+              <div>{trip.country}</div>
               <div>{trip.start_date}</div>
               <div>{trip.end_date}</div>
               <Button onClick={this.showEdit}>Edit Trip</Button>

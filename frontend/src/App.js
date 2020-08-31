@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./component/Home";
-
 import Navigation from "./component/Navigation";
 import Axios from "axios";
-
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
 import Trip from "./component/trips/Trip";
 import AddTrip from "./component/trips/AddTrip";
-
 import AllPackingLists from "./component/AllPackingLists";
 import PackingList from "./component/packingLists/PackingList";
 import AddPackingList from "./component/packingLists/AddPackingList";

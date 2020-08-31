@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Container } from "react-bootstrap";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
+
 const URL = process.env.REACT_APP_URL;
 
 export default class AddActivity extends Component {
@@ -12,6 +14,7 @@ export default class AddActivity extends Component {
     address: "",
     description: "",
     image_url: "",
+    status: false,
   };
 
   changeHandler = (e) => {
@@ -22,7 +25,8 @@ export default class AddActivity extends Component {
     console.log(this.state);
     Axios.post(`${URL}/activities`, this.state)
       .then((res) => {
-        // console.log("done");
+        console.log("done");
+        this.setState({ status: true });
       })
       .catch((err) => {
         console.log(err);
@@ -39,6 +43,10 @@ export default class AddActivity extends Component {
       description,
       image_url,
     } = this.state;
+
+    if (this.state.status) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div>
