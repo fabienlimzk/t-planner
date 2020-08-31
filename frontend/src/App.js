@@ -22,6 +22,7 @@ export default class App extends Component {
 
     trips: [],
     packingLists: [],
+    trips: [],
   };
 
   fetchActivities = () => {
@@ -35,13 +36,12 @@ export default class App extends Component {
       });
   };
 
-
   fetchTrips = () => {
     Axios.get(`${URL}/trips`)
       .then((res) => {
         // console.log(res.data);
         this.setState({ trips: res.data.trips });
-})
+      })
       .catch((err) => {
         console.log(err);
       });
@@ -52,7 +52,17 @@ export default class App extends Component {
       .then((res) => {
         // console.log(res.data);
         this.setState({ packingLists: res.data.packingLists });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
+  fetchTrips = () => {
+    Axios.get(`${URL}/trips`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({ trips: res.data.trips });
       })
       .catch((err) => {
         console.log(err);
@@ -61,10 +71,8 @@ export default class App extends Component {
 
   componentDidMount() {
     this.fetchActivities();
-  this.fetchTrips();
-
+    this.fetchTrips();
     this.fetchPackingLists();
-
   }
 
   render() {
@@ -75,19 +83,7 @@ export default class App extends Component {
           <Route
             path="/"
             exact
-            render={() => (
-              <Home
-                activities={this.state.activities}
-                trips={this.state.trips}
-              />
-            )}
-          />
-          <Route path="/activity/add" exact render={() => <AddActivity />} />
-          <Route path="/activity/:id" component={Activity} />
-          <Route path="/trip/add" exact render={() => <AddTrip />} />
-          <Route path="/trip/:id" component={Trip} />
-
-            render={() => <Home activities={this.state.activities} />}
+            render={() => <Home trips={this.state.trips} />}
           />
           <Route
             path="/activities"
@@ -110,7 +106,8 @@ export default class App extends Component {
             render={() => <AddPackingList />}
           />
           <Route path="/packingList/:id" component={PackingList} />
-
+          <Route path="/trip/add" exact render={() => <AddTrip />} />
+          <Route path="/trip/:id" component={Trip} />
         </Switch>
       </Router>
     );
