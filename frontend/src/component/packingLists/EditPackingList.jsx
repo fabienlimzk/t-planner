@@ -26,8 +26,15 @@ export default class EditPackingList extends Component {
     this.setState({ items: [...this.state.items, ""] });
   };
 
+  componentDidMount = () => {
+    this.setState(this.props.packingList);
+  };
+
   render() {
     let { items } = this.state;
+
+    console.log(this.state);
+
     return (
       <div>
         <Container>

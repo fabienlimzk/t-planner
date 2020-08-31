@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 
-class EditTrip extends Component {
+export default class EditTrip extends Component {
   state = {
     title: "",
     description: "",
@@ -69,5 +69,3 @@ class EditTrip extends Component {
     );
   }
 }
-
-export default EditTrip;

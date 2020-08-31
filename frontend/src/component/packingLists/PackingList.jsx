@@ -78,7 +78,7 @@ export default class PackingList extends Component {
     return (
       <div>
         <Container>
-          <h1>Edit Packing List</h1>
+          <h1>Packing List</h1>
           {packingList ? (
             <div>
               {packingList.items.map((item, index) => (
