@@ -46,21 +46,23 @@ export default class Trip extends Component {
     let { trip, edit } = this.state;
     return (
       <div>
-        <h1>Trip</h1>
-        {trip ? (
-          <div>
+        <Container>
+          <h1>Trip</h1>
+          {trip ? (
             <div>
-              <h3>{trip.title}</h3>
+              <div>
+                <h3>{trip.title}</h3>
+              </div>
+              <div>{trip.description}</div>
+              <div>{trip.start_date}</div>
+              <div>{trip.end_date}</div>
+              <Button onClick={this.showEdit}>Edit Trip</Button>
+              {edit && <EditTrip trip={trip} editTrip={this.editTrip} />}
             </div>
-            <div>{trip.description}</div>
-            <div>{trip.start_date}</div>
-            <div>{trip.end_date}</div>
-            <Button onClick={this.showEdit}>Edit Trip</Button>
-            {edit && <EditTrip trip={trip} editTrip={this.editTrip} />}
-          </div>
-        ) : (
-          "Loading..."
-        )}
+          ) : (
+            "Loading..."
+          )}
+        </Container>
       </div>
     );
   }

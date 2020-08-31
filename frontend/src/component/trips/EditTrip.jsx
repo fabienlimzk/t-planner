@@ -18,6 +18,10 @@ class EditTrip extends Component {
     this.props.editTrip(this.state, this.props.trip._id);
   };
 
+  componentDidMount = () => {
+    this.setState(this.props.trip);
+  };
+
   render() {
     let { title, description, start_date, end_date } = this.state;
 
@@ -45,7 +49,7 @@ class EditTrip extends Component {
             Start date:
             <Form.Control
               name="start_date"
-              value={start_date}
+              value={start_date.split("T")[0]}
               type="date"
               onChange={this.changeHandler}
             />
@@ -54,7 +58,7 @@ class EditTrip extends Component {
             End date:
             <Form.Control
               name="end_date"
-              value={end_date}
+              value={end_date.split("T")[0]}
               type="date"
               onChange={this.changeHandler}
             />

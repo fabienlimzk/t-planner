@@ -8,6 +8,11 @@ const URL = process.env.REACT_APP_URL;
 export default class Activity extends Component {
   state = {
     activity: null,
+    edit: false,
+  };
+
+  showEdit = () => {
+    this.setState((prevState) => ({ edit: !prevState.edit }));
   };
 
   editActivity = (obj, id) => {
@@ -43,8 +48,9 @@ export default class Activity extends Component {
 
   deleteActivity = (e) => {
     // this.props.deleteActivity(e.target.id);
-    console.log(this.props); 
+    console.log(this.props);
   };
+
   // deleteActivity = (e) => {
   //   console.log("trying to delete");
   //   Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
@@ -69,20 +75,13 @@ export default class Activity extends Component {
   }
 
   render() {
-    let { activity } = this.state;
+    let { activity, edit } = this.state;
     return (
       <div>
         <Container>
+{/* 
           {activity ? (
             <div>
-              {/* IF DONT NEED, CAN DELETE - THANKS BOSS */
-              /* <div>Title: {activity.title} </div>
-              <div>Start Date: {activity.start_date} </div>
-              <div>End Date: {activity.end_date} </div>
-              <div>Duration: {activity.duration} </div>
-              <div>Address: {activity.address} </div>
-              <div>Description: {activity.description} </div>
-            <div>Image: <a href={activity.image_url}></a> </div> <br /> */}
               <EditActivity
                 activity={activity}
                 editActivity={this.editActivity}
@@ -91,17 +90,30 @@ export default class Activity extends Component {
           ) : (
             "testing testing"
           )}
-          <Button
-            variant="danger"
-            // id={activity._id}
-            onClick={this.deleteActivity}
-          >
+          <Button variant="danger" onClick={this.deleteActivity}>
             Delete Activity
-          </Button>
+          </Button> */}
+        
+          {activity ? (
+            <div>
+              <div>
+                <h3>{activity.title}</h3>
+              </div>
+              <div>Start: {activity.start_date.split("T")[0]}</div>
+              <div>End: {activity.end_date.split("T")[0]}</div>
+              <div>Duration: {activity.duration}</div>
+              <div>Address: {activity.address}</div>
+              <div>Description: {activity.description}</div>
+              <div>{activity.image_url}</div>
+              <Button onClick={this.showEdit}>Edit Trip</Button>
+              {edit && <EditActivity activity={activity} editActivity={this.editActivity} />}
+            </div>
+          ) : (
+            "Loading..."
+          )}
+
         </Container>
       </div>
     );
   }
 }
-
-

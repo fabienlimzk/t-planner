@@ -31,10 +31,17 @@ export default class AllActivities extends Component {
   };
 
   deleteActivity = (e) => {
-    console.log(e.target.id);
-    Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-      this.fetchActivities();
-    });
+    const id = e.target.id 
+    // console.log(e.target.id);
+    Axios.delete(`${URL}/activities/${id}`).then(() => {
+      let activities = this.state.activities.filter(activity => activity._id !== id)
+      // console.log(activities);
+      this.setState({activities});
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+    ;
   };
 
   componentDidMount() {
@@ -48,7 +55,7 @@ export default class AllActivities extends Component {
         <h1>Activity</h1>
         <Container fluid>
           <Row>
-            {this.props.activities.map((activity) => (
+            {this.state.activities.map((activity) => (
               <Col key={activity._id} md="3">
                 <Card>
                   <Card.Body>
@@ -57,6 +64,7 @@ export default class AllActivities extends Component {
                       <Link to={`/activity/${activity._id}`}>
                         {activity.title}
                         <br />
+                      </Link>
                         <Button
                           onClick={this.deleteActivity}
                           variant="danger"
@@ -65,7 +73,6 @@ export default class AllActivities extends Component {
                         >
                           Delete
                         </Button>
-                      </Link>
                       {activity.description} <br />
                     </div>
                   </Card.Body>
