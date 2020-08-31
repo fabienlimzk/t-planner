@@ -1,61 +1,90 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Container } from "react-bootstrap";
 import Axios from "axios";
+import { Redirect } from "react-router-dom";
+
 const URL = process.env.REACT_APP_URL;
 
 export default class AddPackingList extends Component {
   state = {
     title: "",
-    item: "",
+    items: [],
+    status: false,
   };
 
-  changeHandler = (e) => {
+  titleChangeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  submitHandler = () => {
+  itemChangeHandler = (e, index) => {
+    this.state.items[index] = e.target.value;
+    this.setState({ items: this.state.items });
+  };
+
+  removeHandler = (index) => {
+    this.state.items.splice(index, 1);
+    console.log(this.state.items, "----");
+    this.setState({ items: this.state.items });
+  };
+
+  submitHandler = (e) => {
     console.log(this.state);
     Axios.post(`${URL}/packingLists`, this.state)
       .then((res) => {
-        // console.log("done");
+        console.log("done");
+        this.setState({ status: true });
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  addItem = () => {
+    this.setState({ items: [...this.state.items, ""] });
+  };
+
   render() {
-    let {
-      title,
-      item,
-    } = this.state;
+    let { title, items } = this.state;
+
+    if (this.state.status) {
+      return <Redirect to="/" />;
+    }
 
     return (
       <div>
-        <div>
-          <Container>
-            <h1>Add Item</h1>
-            <Row>
-              Title
-              <Form.Control
-                name="title"
-                value={title}
-                placeholder="Summer"
-                onChange={this.changeHandler}
-              />
-            </Row>
-            <Row>
-              Item
-              <Form.Control
-                name="item"
-                value={item}
-                placeholder="FlipFlops"
-                onChange={this.changeHandler}
-              />
-            </Row>
-            <Button onClick={this.submitHandler}>Submit</Button>
-          </Container>
-        </div>
+        <Container>
+          <h1>Add Item</h1>
+          <Row>
+            Title:
+            <Form.Control
+              name="title"
+              value={title}
+              placeholder="Summer"
+              onChange={this.titleChangeHandler}
+            />
+          </Row>
+          <div>
+            {items.map((item, index) => (
+              <Row key={index}>
+                <Form.Control
+                  name="items"
+                  value={item}
+                  placeholder="FlipFlops"
+                  onChange={(e) => this.itemChangeHandler(e, index)}
+                />
+                <Button
+                  variant="danger"
+                  onClick={() => this.removeHandler(index)}
+                >
+                  Remove
+                </Button>
+              </Row>
+            ))}
+          </div>
+
+          <Button onClick={(e) => this.addItem(e)}>Add more item</Button>
+          <Button onClick={this.submitHandler}>Submit</Button>
+        </Container>
       </div>
     );
   }

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Form, Button, Row } from "react-bootstrap";
 
-class EditTrip extends Component {
+export default class EditTrip extends Component {
   state = {
     title: "",
     description: "",
+    country: "",
     start_date: "",
     end_date: "",
     status: false,
@@ -23,7 +24,7 @@ class EditTrip extends Component {
   };
 
   render() {
-    let { title, description, start_date, end_date } = this.state;
+    let { title, description, country, start_date, end_date } = this.state;
 
     return (
       <div>
@@ -42,6 +43,14 @@ class EditTrip extends Component {
             <Form.Control
               name="description"
               value={description}
+              onChange={this.changeHandler}
+            />
+          </Row>
+          <Row>
+            Country:
+            <Form.Control
+              name="country"
+              value={country}
               onChange={this.changeHandler}
             />
           </Row>
@@ -69,5 +78,3 @@ class EditTrip extends Component {
     );
   }
 }
-
-export default EditTrip;

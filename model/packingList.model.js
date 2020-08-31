@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const packingListSchema = new mongoose.Schema(
   {
     title: String,
-    item: String,
+    items: [String],
   },
   {
     timestamps: true,
@@ -13,4 +13,3 @@ const packingListSchema = new mongoose.Schema(
 const PackingList = mongoose.model("PackingList", packingListSchema);
 
 module.exports = PackingList;
-

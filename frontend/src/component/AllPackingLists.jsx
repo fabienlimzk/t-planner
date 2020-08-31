@@ -49,23 +49,25 @@ export default class AllPackingLists extends Component {
         <h1>Packing List</h1>
         <Container fluid>
           <Row>
-            {this.props.packingLists.map((packingList) => (
+            {this.props.packingLists.map((packingList, index) => (
               <Col key={packingList._id} md="3">
                 <Card>
                   <Card.Body>
                     <div>
-                      <Link to={`/packingList/${packingList._id}`}>
-                        {packingList.title}
-                        <br />
-                        <Button
-                          onClick={this.deletePackingList}
-                          variant="danger"
-                          id={packingList._id}
-                          style={{ float: "right" }}
-                        >
-                          Delete
-                        </Button>
-                      </Link>
+                      {packingList.title}
+                      <br />
+                    </div>
+                    <div>
+                      <Link to={`/packingList/${packingList._id}`}>View</Link>
+                      <Button
+                        onClick={this.deletePackingList}
+                        variant="danger"
+                        id={packingList._id}
+                        size="sm"
+                        style={{ float: "right" }}
+                      >
+                        Delete
+                      </Button>
                       {packingList.item} <br />
                     </div>
                   </Card.Body>
