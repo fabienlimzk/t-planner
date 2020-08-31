@@ -21,7 +21,7 @@ export default class AllPackingLists extends Component {
       // }
     )
       .then((res) => {
-        //       // console.log(res.data
+        console.log(res.data.packingLists);
         //       // if (this.mounted) {
         this.setState({ packingLists: res.data.packingLists });
         //       // }

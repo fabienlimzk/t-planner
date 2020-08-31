@@ -3,19 +3,27 @@ import { Form, Button, Row, Container } from "react-bootstrap";
 
 export default class EditActivity extends Component {
   state = {
-    title: this.props.activity.title,
-    duration: this.props.activity.duration,
-    address: this.props.activity.address,
-    description: this.props.activity.description,
+    title: "",
+    start_date: "",
+    end_date: "",
+    duration: "",
+    address: "",
+    description: "",
+    image_url: "",
   };
 
   changeHandler = (e) => {
     //allow a re render in activity.jsx
     this.setState({ [e.target.name]: e.target.value });
+    // console.log(e.target.value);
   };
 
   submitHandler = () => {
     this.props.editActivity(this.state, this.props.activity._id);
+  };
+
+  componentDidMount = () => {
+    this.setState(this.props.activity);
   };
 
   render() {
@@ -28,6 +36,7 @@ export default class EditActivity extends Component {
       description,
       image_url,
     } = this.state;
+
     return (
       <div>
         <Container>
@@ -41,20 +50,22 @@ export default class EditActivity extends Component {
                 onChange={this.changeHandler}
               />
             </Row>
+            {/* {start_date && ( */}
             <Row>
               Start date
               <Form.Control
                 name="start_date"
-                value={start_date}
+                value={start_date.split("T")[0]}
                 type="date"
                 onChange={this.changeHandler}
               />
             </Row>
+            {/* )} */}
             <Row>
               End date
               <Form.Control
                 name="end_date"
-                value={end_date}
+                value={end_date.split("T")[0]}
                 type="date"
                 onChange={this.changeHandler}
               />

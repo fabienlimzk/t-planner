@@ -88,7 +88,7 @@ export default class App extends Component {
           <Route
             path="/activities"
             exact
-            render={() => <AllActivities activities={this.state.activities} />}
+            render={() => <AllActivities />}
           />
           <Route path="/activity/add" exact render={() => <AddActivity />} />
           <Route path="/activity/:id" component={Activity} />
@@ -113,3 +113,6 @@ export default class App extends Component {
     );
   }
 }
+
+
+// activities={this.state.activities} 
