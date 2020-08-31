@@ -7,6 +7,12 @@ const tripSchema = new mongoose.Schema(
     start_date: String,
     end_date: String,
     duration: String,
+    activities: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Activity",
+      },
+    ],
   },
   {
     timestamps: true,

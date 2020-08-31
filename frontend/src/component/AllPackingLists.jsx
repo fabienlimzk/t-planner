@@ -55,7 +55,7 @@ export default class AllPackingLists extends Component {
                   <Card.Body>
                     <div>
                       <Link to={`/packingList/${packingList._id}`}>
-                        {packingList.title}
+                        {packingList.items}
                         <br />
                         <Button
                           onClick={this.deletePackingList}

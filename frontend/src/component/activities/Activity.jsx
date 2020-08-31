@@ -79,7 +79,7 @@ export default class Activity extends Component {
     return (
       <div>
         <Container>
-{/* 
+          {/* 
           {activity ? (
             <div>
               <EditActivity
@@ -93,7 +93,7 @@ export default class Activity extends Component {
           <Button variant="danger" onClick={this.deleteActivity}>
             Delete Activity
           </Button> */}
-        
+
           {activity ? (
             <div>
               <div>
@@ -105,13 +105,17 @@ export default class Activity extends Component {
               <div>Address: {activity.address}</div>
               <div>Description: {activity.description}</div>
               <div>{activity.image_url}</div>
-              <Button onClick={this.showEdit}>Edit Trip</Button>
-              {edit && <EditActivity activity={activity} editActivity={this.editActivity} />}
+              <Button onClick={this.showEdit}>Edit Activity</Button>
+              {edit && (
+                <EditActivity
+                  activity={activity}
+                  editActivity={this.editActivity}
+                />
+              )}
             </div>
           ) : (
             "Loading..."
           )}
-
         </Container>
       </div>
     );

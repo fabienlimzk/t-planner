@@ -8,9 +8,14 @@ const URL = process.env.REACT_APP_URL;
 export default class PackingList extends Component {
   state = {
     packingList: null,
+    edit: false,
   };
 
-  EditPackingList = (obj, id) => {
+  showEdit = () => {
+    this.setState((prevState) => ({ edit: !prevState.edit }));
+  };
+
+  editPackingList = (obj, id) => {
     Axios.put(`${URL}/packingLists/${id}`, obj)
       .then((res) => {
         this.getPackingList();
@@ -20,26 +25,26 @@ export default class PackingList extends Component {
       });
   };
 
-  fetchPackingLists = () => {
-    // let token = localStorage.getPackingList("token");
-    Axios.get(
-      `${URL}/packingLists`
-      // , {
-      // headers: {
-      // "x-auth-token": token,
-      // },
-      // }
-    )
-      .then((res) => {
-        // console.log(res.data);
-        // if (this.mounted) {
-        this.setState({ packingLists: res.data.packingLists });
-        // }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // fetchPackingLists = () => {
+  //   // let token = localStorage.getPackingList("token");
+  //   Axios.get(
+  //     `${URL}/packingLists`
+  //     // , {
+  //     // headers: {
+  //     // "x-auth-token": token,
+  //     // },
+  //     // }
+  //   )
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       // if (this.mounted) {
+  //       this.setState({ packingLists: res.data.packingLists });
+  //       // }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   deletePackingList = (e) => {
     // this.props.deletePackingList(e.target.id);
@@ -69,26 +74,27 @@ export default class PackingList extends Component {
   }
 
   render() {
-    let { packingList } = this.state;
+    let { packingList, edit } = this.state;
     return (
       <div>
         <Container>
+          <h1>Edit Packing List</h1>
           {packingList ? (
             <div>
-              <EditPackingList
-                packingList={packingList}
-                editPackingList={this.editPackingList}
-              />
+              {packingList.items.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+              <Button onClick={this.showEdit}>Edit Packing List</Button>
+              {edit && (
+                <EditPackingList
+                  packingList={packingList}
+                  editPackingList={this.editPackingList}
+                />
+              )}
             </div>
           ) : (
-            "testing testing"
+            "Loading..."
           )}
-          <Button
-            variant="danger"
-            onClick={this.deletePackingList}
-          >
-            Delete item
-          </Button>
         </Container>
       </div>
     );

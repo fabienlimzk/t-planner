@@ -19,8 +19,6 @@ const URL = process.env.REACT_APP_URL;
 export default class App extends Component {
   state = {
     activities: [],
-
-    trips: [],
     packingLists: [],
     trips: [],
   };
@@ -85,11 +83,7 @@ export default class App extends Component {
             exact
             render={() => <Home trips={this.state.trips} />}
           />
-          <Route
-            path="/activities"
-            exact
-            render={() => <AllActivities />}
-          />
+          <Route path="/activities" exact render={() => <AllActivities />} />
           <Route path="/activity/add" exact render={() => <AddActivity />} />
           <Route path="/activity/:id" component={Activity} />
 
@@ -114,5 +108,4 @@ export default class App extends Component {
   }
 }
 
-
-// activities={this.state.activities} 
+// activities={this.state.activities}

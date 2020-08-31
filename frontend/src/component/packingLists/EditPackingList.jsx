@@ -3,47 +3,53 @@ import { Form, Button, Row, Container } from "react-bootstrap";
 
 export default class EditPackingList extends Component {
   state = {
-    title: this.props.packingList.title,
-    item: this.props.packingList.item,
+    items: [],
   };
 
-  changeHandler = (e) => {
+  changeHandler = (e, index) => {
     //allow a re render in packingList.jsx
-    this.setState({ [e.target.name]: e.target.value });
+    this.state.items[index] = e.target.value;
+    this.setState({ items: this.state.items });
+  };
+
+  removeHandler = (index) => {
+    this.state.items.splice(index, 1);
+    console.log(this.state.items, "----");
+    this.setState({ items: this.state.items });
   };
 
   submitHandler = () => {
     this.props.editPackingList(this.state, this.props.packingList._id);
   };
 
+  addItem = () => {
+    this.setState({ items: [...this.state.items, ""] });
+  };
+
   render() {
-    let {
-      title,
-      item,
-    } = this.state;
+    let { items } = this.state;
     return (
       <div>
         <Container>
-          <h4>Edit Item</h4>
-          <div>
-            <Row>
-              Title
+          <h1>Edit Item</h1>
+          {items.map((item, index) => (
+            <Row key={index}>
               <Form.Control
-                name="title"
-                value={title}
-                onChange={this.changeHandler}
-              />
-            </Row>
-            <Row>
-              Item
-              <Form.Control
-                name="item"
+                name="items"
                 value={item}
-                onChange={this.changeHandler}
+                placeholder="FlipFlops"
+                onChange={(e) => this.changeHandler(e, index)}
               />
+              <Button
+                variant="danger"
+                onClick={() => this.removeHandler(index)}
+              >
+                Remove
+              </Button>
             </Row>
-            <Button onClick={this.submitHandler}>Submit</Button>
-          </div>
+          ))}
+          <Button onClick={(e) => this.addItem(e)}>Add more item</Button>
+          <Button onClick={this.submitHandler}>Submit</Button>
         </Container>
       </div>
     );
