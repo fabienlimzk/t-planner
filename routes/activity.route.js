@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Activity = require("../model/activity.model");
+const Trip = require("../model/trip.model");
 const checkToken = require("../config/config.js");
 
 /* 
@@ -107,11 +108,19 @@ router.post("/", checkToken, async (req, res) => {
       createdBy: req.user.id,
     });
 
-    let savedactivity = await activity.save();
-
+    let savedActivity = await activity.save();
+    // TODO
+    // if (savedActivity) {
+    //   // console.log(trip);
+    //   await Trip.findByIdAndUpdate(req.params.id, {
+    //     $push: { activities: activity._id },
+    //   }).then(() => {
+    //     console.log("added " + activity._id + " into " + req.params.id);
     res.status(201).json({
       message: "post works",
     });
+    //   });
+    // }
   } catch (error) {
     res.status(500).json({
       message: "post doesnt work",

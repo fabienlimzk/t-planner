@@ -18,12 +18,12 @@ const tripSchema = new mongoose.Schema(
         ref: "User",
       },
     ],
-    // activities: [
-    //   {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: "Activity",
-    //   },
-    // ],
+    activities: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Activity",
+      },
+    ],
     // packingLists: {
     //   type: mongoose.Schema.Types.ObjectId,
     //   ref: "PackingList",
