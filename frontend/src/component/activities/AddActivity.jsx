@@ -14,7 +14,7 @@ export default class AddActivity extends Component {
     address: "",
     description: "",
     image_url: "",
-    status: false,
+    // status: false,
   };
 
   changeHandler = (e) => {
@@ -28,7 +28,7 @@ export default class AddActivity extends Component {
     })
       .then((res) => {
         console.log("done");
-        this.setState({ status: true });
+        // this.setState({ status: true });
       })
       .catch((err) => {
         console.log(err);
@@ -46,9 +46,9 @@ export default class AddActivity extends Component {
       image_url,
     } = this.state;
 
-    if (this.state.status) {
-      return <Redirect to="/" />;
-    }
+    // if (this.state.status) {
+    //   return <Redirect to="/" />;
+    // }
 
     return (
       <div>
