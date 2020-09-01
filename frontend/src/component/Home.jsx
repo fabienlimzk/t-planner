@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 const URL = process.env.REACT_APP_URL;
 
 export default class Home extends Component {
@@ -10,20 +11,15 @@ export default class Home extends Component {
   };
 
   fetchTrips = () => {
-    //   // let token = localStorage.getTrip("token");
-    Axios.get(
-      `${URL}/trips`
-      // , {
-      //     headers: {
-      //       "x-auth-token": token,
-      //     },
-      // }
-    )
+    let token = localStorage.getItem("token");
+
+    Axios.get(`${URL}/trips`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then((res) => {
-        //       // console.log(res.data
-        //       // if (this.mounted) {
         this.setState({ trips: res.data.trips });
-        //       // }
       })
       .catch((err) => {
         console.log(err);
@@ -32,7 +28,6 @@ export default class Home extends Component {
 
   deleteTrip = (e) => {
     const id = e.target.id;
-    // console.log(e.target.id);
     Axios.delete(`${URL}/trips/${e.target.id}`)
       .then(() => {
         let trips = this.state.trips.filter((trip) => trip._id !== id);
@@ -52,9 +47,10 @@ export default class Home extends Component {
     return (
       <div>
         <h1>Trips</h1>
+        {/* {currentUser == user.id ? ( */}
         <Container fluid>
           <Row>
-            {this.props.trips.map((trip) => (
+            {this.state.trips.map((trip) => (
               <Col key={trip._id} md="3">
                 <Card>
                   <Card.Body>
@@ -87,6 +83,9 @@ export default class Home extends Component {
             ))}
           </Row>
         </Container>
+        {/* ) : (
+          "You cannot see this"
+        )} */}
       </div>
     );
   }

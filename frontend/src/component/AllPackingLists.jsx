@@ -7,24 +7,20 @@ const URL = process.env.REACT_APP_URL;
 
 export default class AllPackingLists extends Component {
   state = {
-    packingList: [],
+    packingLists: [],
   };
 
   fetchPackingLists = () => {
-    //   // let token = localStorage.getPackingList("token");
-    Axios.get(
-      `${URL}/packingLists`
-      // , {
-      //     headers: {
-      //       "x-auth-token": token,
-      //     },
-      // }
-    )
+    let token = localStorage.getItem("token");
+
+    Axios.get(`${URL}/packingLists`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then((res) => {
-        console.log(res.data.packingLists);
-        //       // if (this.mounted) {
+        // console.log(res.data.packingLists);
         this.setState({ packingLists: res.data.packingLists });
-        //       // }
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +45,7 @@ export default class AllPackingLists extends Component {
         <h1>Packing List</h1>
         <Container fluid>
           <Row>
-            {this.props.packingLists.map((packingList, index) => (
+            {this.state.packingLists.map((packingList, index) => (
               <Col key={packingList._id} md="3">
                 <Card>
                   <Card.Body>
@@ -68,7 +64,7 @@ export default class AllPackingLists extends Component {
                       >
                         Delete
                       </Button>
-                      {packingList.item} <br />
+                      {/* {packingList.item} <br /> */}
                     </div>
                   </Card.Body>
                 </Card>

@@ -11,20 +11,15 @@ export default class AllActivities extends Component {
   };
 
   fetchActivities = () => {
-    //   // let token = localStorage.getActivity("token");
-    Axios.get(
-      `${URL}/activities`
-      // , {
-      //     headers: {
-      //       "x-auth-token": token,
-      //     },
-      // }
-    )
+    let token = localStorage.getItem("token");
+
+    Axios.get(`${URL}/activities`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then((res) => {
-        //       // console.log(res.data
-        //       // if (this.mounted) {
         this.setState({ activities: res.data.activities });
-        //       // }
       })
       .catch((err) => {
         console.log(err);

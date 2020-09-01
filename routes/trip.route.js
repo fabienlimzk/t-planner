@@ -1,14 +1,18 @@
 const router = require("express").Router();
+const User = require("../model/user.model");
 const Trip = require("../model/trip.model");
+const checkToken = require("../config/config.js");
 
 /* 
   @route GET api/trips/:id
   @desc gets one trip
   @access public
 */
-router.get("/:id", async (req, res) => {
+// GET only one trip
+router.get("/:id", checkToken, async (req, res) => {
   try {
-    let trip = await Trip.findById(req.params.id);
+    let user = await User.findById(req.params.id);
+    let trip = await Trip.findById(req.params.id).populate("createdBy");
     res.status(200).json({
       message: "Trip found",
       trip,
@@ -26,9 +30,19 @@ router.get("/:id", async (req, res) => {
   @desc updates one trip
   @access public
 */
-router.put("/:id", async (req, res) => {
+// EDIT that one trip
+router.put("/:id", checkToken, async (req, res) => {
   try {
-    let trip = await Trip.findByIdAndUpdate(req.params.id, req.body);
+    let editedTrip = {
+      title: req.body.title,
+      description: req.body.description,
+      country: req.body.country,
+      start_date: req.body.start_date,
+      end_date: req.body.end_date,
+      editedBy: req.user.id,
+    };
+
+    let trip = await Trip.findByIdAndUpdate(req.params.id, editedTrip);
 
     if (trip) {
       res.status(200).json({
@@ -69,11 +83,22 @@ router.delete("/:id", async (req, res) => {
   @desc gets all trips
   @access public
 */
-router.post("/", async (req, res) => {
+// CREATE new trip
+router.post("/", checkToken, async (req, res) => {
   try {
-    let trip = new Trip(req.body);
+    let { title, description, country, start_date, end_date } = req.body;
+
+    let trip = new Trip({
+      title,
+      description,
+      country,
+      start_date,
+      end_date,
+      createdBy: req.user.id,
+    });
 
     let savedTrip = await trip.save();
+
     res.status(201).json({
       message: "Trip has been created!",
     });
@@ -90,12 +115,13 @@ router.post("/", async (req, res) => {
   @desc gets all trips
   @access public
 */
-router.get("/", async (req, res) => {
+// GET all trips
+router.get("/", checkToken, async (req, res) => {
   console.log(req.user);
 
   try {
-    let trips = await Trip.find();
-
+    let user = await User.find();
+    let trips = await Trip.find().populate("createdBy");
     res.status(200).json({
       count: trips.length,
       trips,

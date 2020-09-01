@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import EditTrip from "./EditTrip";
 import { Container, Button } from "react-bootstrap";
+import { Redirect } from "react-router-dom";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -16,7 +17,9 @@ export default class Trip extends Component {
   };
 
   editTrip = (obj, id) => {
-    Axios.put(`${URL}/trips/${id}`, obj)
+    Axios.put(`${URL}/trips/${id}`, obj, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         // console.log("done");
         //call method to call a re-render
@@ -28,15 +31,13 @@ export default class Trip extends Component {
   };
 
   fetchTrips = () => {
-    // let token = localStorage.getTrip("token");
-    Axios.get(
-      `${URL}/trips`
-      // , {
-      // headers: {
-      // "x-auth-token": token,
-      // },
-      // }
-    )
+    let token = localStorage.getTrip("token");
+
+    Axios.get(`${URL}/trips`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then((res) => {
         // console.log(res.data);
         // if (this.mounted) {
@@ -49,7 +50,9 @@ export default class Trip extends Component {
   };
 
   getTrip = () => {
-    Axios.get(`${URL}/trips/${this.props.match.params.id}`)
+    Axios.get(`${URL}/trips/${this.props.match.params.id}`, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log(res.data);
         this.setState({ trip: res.data.trip });
@@ -65,6 +68,11 @@ export default class Trip extends Component {
 
   render() {
     let { trip, edit } = this.state;
+
+    if (this.state.status) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <div>
         <Container>
@@ -78,6 +86,7 @@ export default class Trip extends Component {
               <div>{trip.country}</div>
               <div>{trip.start_date}</div>
               <div>{trip.end_date}</div>
+              <div>Created By: {trip.createdBy.username}</div>
               <Button onClick={this.showEdit}>Edit Trip</Button>
               {edit && <EditTrip trip={trip} editTrip={this.editTrip} />}
             </div>

@@ -16,7 +16,9 @@ export default class PackingList extends Component {
   };
 
   editPackingList = (obj, id) => {
-    Axios.put(`${URL}/packingLists/${id}`, obj)
+    Axios.put(`${URL}/packingLists/${id}`, obj, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         this.getPackingList();
       })
@@ -25,26 +27,21 @@ export default class PackingList extends Component {
       });
   };
 
-  // fetchPackingLists = () => {
-  //   // let token = localStorage.getPackingList("token");
-  //   Axios.get(
-  //     `${URL}/packingLists`
-  //     // , {
-  //     // headers: {
-  //     // "x-auth-token": token,
-  //     // },
-  //     // }
-  //   )
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       // if (this.mounted) {
-  //       this.setState({ packingLists: res.data.packingLists });
-  //       // }
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  fetchPackingLists = () => {
+    let token = localStorage.getItem("token");
+
+    Axios.get(`${URL}/packingLists`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
+      .then((res) => {
+        this.setState({ packingLists: res.data.packingLists });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   deletePackingList = (e) => {
     // this.props.deletePackingList(e.target.id);
@@ -59,7 +56,9 @@ export default class PackingList extends Component {
   // };
 
   getPackingList = () => {
-    Axios.get(`${URL}/packingLists/${this.props.match.params.id}`)
+    Axios.get(`${URL}/packingLists/${this.props.match.params.id}`, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log(res.data);
         this.setState({ packingList: res.data.packingList });

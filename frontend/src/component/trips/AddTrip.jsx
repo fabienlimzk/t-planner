@@ -21,13 +21,15 @@ class AddTrip extends Component {
 
   submitHandler = () => {
     console.log(this.state);
-    Axios.post(`${URL}/trips`, this.state)
+    Axios.post(`${URL}/trips`, this.state, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log("done");
         this.setState({ status: true });
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response.data);
       });
   };
 

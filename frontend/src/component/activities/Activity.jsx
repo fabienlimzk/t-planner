@@ -16,7 +16,9 @@ export default class Activity extends Component {
   };
 
   editActivity = (obj, id) => {
-    Axios.put(`${URL}/activities/${id}`, obj)
+    Axios.put(`${URL}/activities/${id}`, obj, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         this.getActivity();
       })
@@ -26,20 +28,15 @@ export default class Activity extends Component {
   };
 
   fetchActivities = () => {
-    // let token = localStorage.getActivity("token");
-    Axios.get(
-      `${URL}/activities`
-      // , {
-      // headers: {
-      // "x-auth-token": token,
-      // },
-      // }
-    )
+    let token = localStorage.getItem("token");
+
+    Axios.get(`${URL}/activities`, {
+      headers: {
+        "x-auth-token": token,
+      },
+    })
       .then((res) => {
-        // console.log(res.data);
-        // if (this.mounted) {
         this.setState({ activities: res.data.activities });
-        // }
       })
       .catch((err) => {
         console.log(err);
@@ -60,7 +57,9 @@ export default class Activity extends Component {
   // };
 
   getActivity = () => {
-    Axios.get(`${URL}/activities/${this.props.match.params.id}`)
+    Axios.get(`${URL}/activities/${this.props.match.params.id}`, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log(res.data);
         this.setState({ activity: res.data.activity });
