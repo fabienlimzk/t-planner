@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Row, Container } from "react-bootstrap";
 import Axios from "axios";
 import { Redirect } from "react-router-dom";
+import Map from "../map/Map";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -119,6 +120,12 @@ export default class AddActivity extends Component {
               />
             </Row>
             <Button onClick={this.submitHandler}>Submit</Button>
+            <Map
+              google={this.props.google}
+              center={{ lat: 1.2832, lng: 103.8466 }}
+              height="300px"
+              zoom={15}
+            />
           </Container>
         </div>
       </div>

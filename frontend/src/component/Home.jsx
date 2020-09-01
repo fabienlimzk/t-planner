@@ -4,12 +4,10 @@ import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SimpleMap from "./map/SimpleMap";
 import SearchBox from "./map/SearchBox";
-import Map from "./map/Map";
 
 const URL = process.env.REACT_APP_URL;
 
 export default class Home extends Component {
-
   state = {
     trips: [],
   };
@@ -86,20 +84,9 @@ export default class Home extends Component {
               </Col>
             ))}
           </Row>
-
           {/* <SearchBox /> */}
-
-          {/* <SimpleMap /> */}
-
-  
-
-        
-          <Map
-            google={this.props.google}
-            center={{ lat: 18.5204, lng: 73.8567 }}
-            height="300px"
-            zoom={15}
-          />
+          <h4>Scroll around the world</h4>
+          <SimpleMap />
         </Container>
         {/* ) : (
           "You cannot see this"

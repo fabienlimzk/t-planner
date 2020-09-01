@@ -9,8 +9,6 @@ import {
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
 Geocode.enableDebug();
-const API_KEY = process.env.REACT_APP_API_KEY;
-
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 
 class Map extends React.Component {
@@ -317,7 +315,7 @@ class Map extends React.Component {
             </div>
           </div>
           <AsyncMap
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`}
+            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: this.props.height }} />}
             mapElement={<div style={{ height: `100%` }} />}
