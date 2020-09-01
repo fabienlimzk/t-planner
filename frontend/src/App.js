@@ -6,7 +6,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import Axios from "axios";
 import Home from "./component/Home";
 import Register from "./component/auth/Register";
