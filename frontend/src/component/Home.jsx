@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { MapContainer } from "./map/MapContainer";
+import { SimpleMap } from "./component/map/SimpleMap";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -83,7 +83,7 @@ export default class Home extends Component {
               </Col>
             ))}
           </Row>
-          <MapContainer />
+          <SimpleMap />
         </Container>
         {/* ) : (
           "You cannot see this"

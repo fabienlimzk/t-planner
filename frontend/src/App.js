@@ -14,7 +14,7 @@ import Home from "./component/Home";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import Navigation from "./component/Navigation";
-import { MapContainer } from "./component/map/MapContainer";
+import { SimpleMap } from "./component/map/SimpleMap";
 
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
