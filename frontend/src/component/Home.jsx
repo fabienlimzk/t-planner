@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { SimpleMap } from "./component/map/SimpleMap";
+import SimpleMap from "./map/SimpleMap";
+import SearchBox from "./map/SearchBox";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -83,6 +84,10 @@ export default class Home extends Component {
               </Col>
             ))}
           </Row>
+          <SearchBox/>
+          {/* <SearchBox
+         placeholder={"123 anywhere st."}
+         onPlacesChanged={this.handleSearch} /> */}
           <SimpleMap />
         </Container>
         {/* ) : (

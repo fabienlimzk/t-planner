@@ -1,6 +1,4 @@
 
-//  AIzaSyBXtcOE6arcwH0cfCad4ae3wkRLGKW9nQs API KEY
-
 import React, { Component } from "react";
 import {
   Switch,
@@ -14,7 +12,6 @@ import Home from "./component/Home";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import Navigation from "./component/Navigation";
-import { SimpleMap } from "./component/map/SimpleMap";
 
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
@@ -172,6 +169,8 @@ export default class App extends Component {
     let { isAuth, user, errorMessage } = this.state;
 
     return (
+      <>
+
       <Router>
         <Navigation user={user} logout={this.logoutHandler} />
         {errorMessage && <Alert>{errorMessage}</Alert>}
@@ -184,7 +183,6 @@ export default class App extends Component {
           <Route path="/activities" exact render={() => <AllActivities />} />
           <Route path="/activity/add" exact render={() => <AddActivity />} />
           <Route path="/activity/:id" component={Activity} />
-          <MapContainer />
           <Route
             path="/login"
             exact
@@ -243,6 +241,7 @@ export default class App extends Component {
           />
         </Switch>
       </Router>
+    </>
     );
   }
 }
