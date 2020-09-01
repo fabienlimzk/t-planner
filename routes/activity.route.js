@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const Activity = require("../model/activity.model");
+const checkToken = require("../config/config.js");
 
 /* 
     @route GET api/activities/:id
     @desc Gets one activity
     @access public
 */
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkToken, async (req, res) => {
   try {
     let activity = await Activity.findById(req.params.id);
     res.status(200).json({
@@ -25,9 +26,23 @@ router.get("/:id", async (req, res) => {
     @desc updates one activity
     @access public
 */
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkToken, async (req, res) => {
   try {
-    let activity = await Activity.findByIdAndUpdate(req.params.id, req.body);
+    let editedActivity = {
+      title: req.body.title,
+      start_date: req.body.start_date,
+      end_date: req.body.end_date,
+      duration: req.body.duration,
+      address: req.body.address,
+      description: req.body.description,
+      image_url: req.body.image_url,
+      editedBy: req.user.id,
+    };
+
+    let activity = await Activity.findByIdAndUpdate(
+      req.params.id,
+      editedActivity
+    );
 
     if (activity) {
       res.status(200).json({
@@ -69,9 +84,28 @@ router.delete("/:id", async (req, res) => {
     @desc Gets all activities
     @access public
 */
-router.post("/", async (req, res) => {
+router.post("/", checkToken, async (req, res) => {
   try {
-    let activity = new Activity(req.body);
+    let {
+      title,
+      start_date,
+      end_date,
+      duration,
+      address,
+      description,
+      image_url,
+    } = req.body;
+
+    let activity = new Activity({
+      title,
+      start_date,
+      end_date,
+      duration,
+      address,
+      description,
+      image_url,
+      createdBy: req.user.id,
+    });
 
     let savedactivity = await activity.save();
 
@@ -85,12 +119,13 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
 /* 
 @route GET api/activities
 @desc Gets all activities
 @access public
 */
-router.get("/", async (req, res) => {
+router.get("/", checkToken, async (req, res) => {
   try {
     let activities = await Activity.find();
 

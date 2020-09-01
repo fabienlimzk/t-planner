@@ -29,7 +29,9 @@ export default class AddPackingList extends Component {
 
   submitHandler = (e) => {
     console.log(this.state);
-    Axios.post(`${URL}/packingLists`, this.state)
+    Axios.post(`${URL}/packingLists`, this.state, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log("done");
         this.setState({ status: true });
@@ -64,6 +66,7 @@ export default class AddPackingList extends Component {
             />
           </Row>
           <div>
+            Items:
             {items.map((item, index) => (
               <Row key={index}>
                 <Form.Control

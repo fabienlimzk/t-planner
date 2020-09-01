@@ -9,6 +9,16 @@ const activitySchema = new mongoose.Schema(
     address: String,
     description: String,
     image_url: String,
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    editedBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     timestamps: true,

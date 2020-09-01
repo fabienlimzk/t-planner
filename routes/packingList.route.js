@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const PackingList = require("../model/packingList.model");
+const checkToken = require("../config/config.js");
 
 /* 
     @route GET api/packingLists/:id
     @desc Gets one packingList
     @access public
 */
-router.get("/:id", async (req, res) => {
+router.get("/:id", checkToken, async (req, res) => {
   try {
     let packingList = await PackingList.findById(req.params.id);
     res.status(200).json({
@@ -25,9 +26,18 @@ router.get("/:id", async (req, res) => {
     @desc updates one packingList
     @access public
 */
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkToken, async (req, res) => {
   try {
-    let packingList = await PackingList.findByIdAndUpdate(req.params.id, req.body);
+    let editedPackingList = {
+      title: req.body.title,
+      items: req.body.items,
+      editedBy: req.user.id,
+    };
+
+    let packingList = await PackingList.findByIdAndUpdate(
+      req.params.id,
+      editedPackingList
+    );
 
     if (packingList) {
       res.status(200).json({
@@ -69,9 +79,11 @@ router.delete("/:id", async (req, res) => {
     @desc Gets all packingLists
     @access public
 */
-router.post("/", async (req, res) => {
+router.post("/", checkToken, async (req, res) => {
   try {
-    let packingList = new PackingList(req.body);
+    let { title, items } = req.body;
+
+    let packingList = new PackingList({ title, items, createdBy: req.user.id });
 
     let savedpackingList = await packingList.save();
 
@@ -85,12 +97,13 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
 /* 
 @route GET api/packingLists
 @desc Gets all packingLists
 @access public
 */
-router.get("/", async (req, res) => {
+router.get("/", checkToken, async (req, res) => {
   try {
     let packingLists = await PackingList.find();
 

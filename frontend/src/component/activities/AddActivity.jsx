@@ -23,7 +23,9 @@ export default class AddActivity extends Component {
 
   submitHandler = () => {
     console.log(this.state);
-    Axios.post(`${URL}/activities`, this.state)
+    Axios.post(`${URL}/activities`, this.state, {
+      headers: { "x-auth-token": localStorage.token },
+    })
       .then((res) => {
         console.log("done");
         this.setState({ status: true });

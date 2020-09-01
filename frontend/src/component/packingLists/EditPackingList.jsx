@@ -53,6 +53,7 @@ export default class EditPackingList extends Component {
             />
           </Row>
           <div>
+            Items:
             {items.map((item, index) => (
               <Row key={index}>
                 <Form.Control
