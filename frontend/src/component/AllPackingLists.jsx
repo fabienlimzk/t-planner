@@ -28,7 +28,7 @@ export default class AllPackingLists extends Component {
   };
 
   deletePackingList = (e) => {
-    console.log(e.target.id);
+    // console.log(e.target.id);
     Axios.delete(`${URL}/packingLists/${e.target.id}`).then((res) => {
       this.fetchPackingLists();
     });

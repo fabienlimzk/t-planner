@@ -8,6 +8,8 @@ import {
 } from "react-google-maps";
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
+import * as parksData from "../map/skateboard-parks.json";
+
 Geocode.enableDebug();
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 
@@ -44,7 +46,7 @@ class Map extends React.Component {
           area = this.getArea(addressArray),
           state = this.getState(addressArray);
 
-        console.log("city", city, area, state);
+        // console.log("city", city, area, state);
 
         this.setState({
           address: address ? address : "",
@@ -153,7 +155,7 @@ class Map extends React.Component {
   onInfoWindowClose = (event) => {};
   /**
    * When the user types an address in the search box
-    * @param place
+   * @param place
    */
   onPlaceSelected = (place) => {
     const address = place.formatted_address,
@@ -187,7 +189,7 @@ class Map extends React.Component {
    * @param event
    */
   onMarkerDragEnd = (event) => {
-    console.log("event", event);
+    // console.log("event", event);
     let newLat = event.latLng.lat(),
       newLng = event.latLng.lng(),
       addressArray = [];
@@ -211,7 +213,8 @@ class Map extends React.Component {
     );
   };
   render() {
-    // console.log(API_KEY);
+    console.log("lat", this.state.mapPosition.lat);
+    console.log("lng", this.state.mapPosition.lng);
 
     const AsyncMap = withScriptjs(
       withGoogleMap((props) => (
@@ -261,6 +264,17 @@ class Map extends React.Component {
               </span>
             </div>
           </InfoWindow>
+{/* SKATEPARKS */}
+          {parksData.features.map((park) => (
+            <Marker
+              key={park.properties.park_ID}
+              position={{
+                lat: park.geometry.coordinates[1],
+                lng: park.geometry.coordinates[0],
+              }}
+            />
+
+          ))}
         </GoogleMap>
       ))
     );

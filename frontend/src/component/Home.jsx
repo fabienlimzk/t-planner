@@ -86,9 +86,9 @@ export default class Home extends Component {
               )
             )}
           </Row>
-          {/* <SearchBox /> */}
-          {/* <h4>Scroll around the world</h4> */}
-          {/* <SimpleMap /> */}
+          <SearchBox />
+          <h4>Scroll around the world</h4>
+          <SimpleMap />
         </Container>
       </div>
     );

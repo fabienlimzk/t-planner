@@ -24,7 +24,7 @@ export default class AddActivity extends Component {
   };
 
   submitHandler = () => {
-    console.log(this.state);
+    // console.log(this.state);
     Axios.post(`${URL}/activities`, this.state, {
       headers: { "x-auth-token": localStorage.token },
     })
@@ -128,7 +128,7 @@ export default class AddActivity extends Component {
             {/* <Map
               google={this.props.google}
               center={{ lat: 1.2832, lng: 103.8466 }}
-              height="300px"
+              height="650px"
               zoom={15}
             /> */}
           </Container>

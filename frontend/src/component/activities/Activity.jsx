@@ -61,7 +61,7 @@ export default class Activity extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ activity: res.data.activity });
       })
       .catch((err) => {

@@ -28,7 +28,7 @@ export default class AddPackingList extends Component {
   };
 
   submitHandler = (e) => {
-    console.log(this.state);
+    // console.log(this.state);
     Axios.post(`${URL}/packingLists`, this.state, {
       headers: { "x-auth-token": localStorage.token },
     })

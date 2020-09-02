@@ -119,7 +119,7 @@ router.post("/", checkToken, async (req, res) => {
 */
 // GET all trips
 router.get("/", checkToken, async (req, res) => {
-  console.log(req.user);
+  // console.log(req.user);
 
   try {
     let user = await User.find();

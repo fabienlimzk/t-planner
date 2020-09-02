@@ -37,7 +37,7 @@ export default class EditPackingList extends Component {
   render() {
     let { title, items } = this.state;
 
-    console.log(this.state);
+    // console.log(this.state);
 
     return (
       <div>

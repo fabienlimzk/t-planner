@@ -20,7 +20,7 @@ class AddTrip extends Component {
   };
 
   submitHandler = () => {
-    console.log(this.state);
+    // console.log(this.state);
     Axios.post(`${URL}/trips`, this.state, {
       headers: { "x-auth-token": localStorage.token },
     })

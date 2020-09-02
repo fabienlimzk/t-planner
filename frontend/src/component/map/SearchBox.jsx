@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import GoogleMapReact from "google-map-react";
 import PropTypes from "prop-types";
 
 export default class SearchBox extends React.Component {
@@ -12,13 +11,7 @@ export default class SearchBox extends React.Component {
     placeholder: PropTypes.string,
     onPlacesChanged: PropTypes.func,
   };
-
-  render() {
-    return (
-    <input ref="input" {...this.props} type="text" />
-    );
-  }
-
+  
   onPlacesChanged = () => {
     if (this.props.onPlacesChanged) {
       this.props.onPlacesChanged(this.searchBox.getPlaces());
@@ -36,4 +29,10 @@ export default class SearchBox extends React.Component {
   componentWillUnmount() {
     this.searchBox.removeListener("places_changed", this.onPlacesChanged);
   }
+  render() {
+    return (
+    <input ref="input" {...this.props} type="text" />
+    );
+  }
+
 }
