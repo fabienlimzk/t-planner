@@ -109,19 +109,24 @@ router.post("/", checkToken, async (req, res) => {
     });
 
     let savedActivity = await activity.save();
-    // TODO
-    // if (savedActivity) {
-    //   // console.log(trip);
-    //   await Trip.findByIdAndUpdate(req.params.id, {
-    //     $push: { activities: activity._id },
-    //   }).then(() => {
-    //     console.log("added " + activity._id + " into " + req.params.id);
-    res.status(201).json({
-      message: "post works",
-    });
-    //   });
-    // }
+
+    if (savedActivity) {
+      let trip = await Trip.findOne({ _id: req.body.trip_id });
+      console.log("this trip id is " + trip);
+      await trip
+        .update({
+          $push: { activities: activity._id },
+        })
+        .then(() => {
+          console.log("added " + activity._id + " into " + trip._id);
+          res.status(201).json({
+            message: "post works",
+            savedActivity,
+          });
+        });
+    }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "post doesnt work",
       statuscode: "EB500",

@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import {
   Switch,
@@ -166,81 +165,91 @@ export default class App extends Component {
 
   render() {
     let { isAuth, user, errorMessage } = this.state;
+    console.log("this belongs to the user logined " + user);
 
     return (
       <>
-
-      <Router>
-        <Navigation user={user} logout={this.logoutHandler} />
-        {errorMessage && <Alert>{errorMessage}</Alert>}
-        <Switch>
-          <Route
-            path="/register"
-            exact
-            render={() => <Register register={this.registerHandler} />}
-          />
-          <Route path="/activities" exact render={() => <AllActivities />} />
-          <Route path="/activity/add" exact render={() => <AddActivity />} />
-          <Route path="/activity/:id" component={Activity} />
-          <Route
-            path="/login"
-            exact
-            render={() =>
-              isAuth ? <Redirect to="/" /> : <Login login={this.loginHandler} />
-            }
-          />
-          <PrivateRoute exact path="/" isAuth={isAuth} component={Home} />
-          <PrivateRoute
-            exact
-            path="/trip/add"
-            isAuth={isAuth}
-            component={AddTrip}
-          />
-          <PrivateRoute
-            exact
-            path="/trip/:id"
-            isAuth={isAuth}
-            component={Trip}
-          />
-          <PrivateRoute
-            exact
-            path="/activities"
-            isAuth={isAuth}
-            component={AllActivities}
-          />
-          <PrivateRoute
-            exact
-            path="/activity/add"
-            isAuth={isAuth}
-            component={AddActivity}
-          />
-          <PrivateRoute
-            exact
-            path="/activity/:id"
-            isAuth={isAuth}
-            component={Activity}
-          />
-          <PrivateRoute
-            exact
-            path="/packingLists"
-            isAuth={isAuth}
-            component={AllPackingLists}
-          />
-          <PrivateRoute
-            exact
-            path="/packingList/add"
-            isAuth={isAuth}
-            component={AddPackingList}
-          />
-          <PrivateRoute
-            exact
-            path="/packingList/:id"
-            isAuth={isAuth}
-            component={PackingList}
-          />
-        </Switch>
-      </Router>
-    </>
+        <Router>
+          <Navigation user={user} logout={this.logoutHandler} />
+          {errorMessage && <Alert>{errorMessage}</Alert>}
+          <Switch>
+            <Route
+              path="/register"
+              exact
+              render={() => <Register register={this.registerHandler} />}
+            />
+            {/* <Route path="/activities" exact render={() => <AllActivities />} /> */}
+            {/* <Route path="/activity/add" exact render={() => <AddActivity />} />
+            <Route path="/activity/:id" component={Activity} /> */}
+            <Route
+              path="/login"
+              exact
+              render={() =>
+                isAuth ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Login login={this.loginHandler} />
+                )
+              }
+            />
+            <PrivateRoute
+              exact
+              path="/"
+              isAuth={isAuth}
+              component={Home}
+              currentUser={user}
+            />
+            <PrivateRoute
+              exact
+              path="/trip/add"
+              isAuth={isAuth}
+              component={AddTrip}
+            />
+            <PrivateRoute
+              exact
+              path="/trip/:id"
+              isAuth={isAuth}
+              component={Trip}
+            />
+            <PrivateRoute
+              exact
+              path="/activities"
+              isAuth={isAuth}
+              component={AllActivities}
+            />
+            <PrivateRoute
+              exact
+              path="/activity/add"
+              isAuth={isAuth}
+              component={AddActivity}
+            />
+            <PrivateRoute
+              exact
+              path="/activity/:id"
+              isAuth={isAuth}
+              component={Activity}
+            />
+            <PrivateRoute
+              exact
+              path="/packingLists"
+              isAuth={isAuth}
+              component={AllPackingLists}
+            />
+            <PrivateRoute
+              exact
+              path="/packingList/add"
+              isAuth={isAuth}
+              component={AddPackingList}
+            />
+            <PrivateRoute
+              exact
+              path="/packingList/:id"
+              isAuth={isAuth}
+              component={PackingList}
+            />
+          </Switch>
+        </Router>
+      </>
     );
   }
 }

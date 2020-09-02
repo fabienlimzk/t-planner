@@ -11,8 +11,10 @@ const checkToken = require("../config/config.js");
 // GET only one trip
 router.get("/:id", checkToken, async (req, res) => {
   try {
-    let user = await User.findById(req.params.id);
-    let trip = await Trip.findById(req.params.id).populate("createdBy");
+    let trip = await Trip.findById(req.params.id)
+      .populate("createdBy")
+      .populate("activities");
+    console.log("this is from get one trip " + trip);
     res.status(200).json({
       message: "Trip found",
       trip,

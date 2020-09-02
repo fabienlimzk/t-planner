@@ -21,6 +21,7 @@ export default class Trip extends Component {
       description: "",
       image_url: "",
     },
+    activities: [],
     edit: false,
     add: false,
   };
@@ -72,7 +73,11 @@ export default class Trip extends Component {
     })
       .then((res) => {
         console.log(res.data);
-        this.setState({ trip: res.data.trip });
+        this.setState({
+          trip: res.data.trip,
+          activities: res.data.trip.activities,
+          trip_id: res.data.trip._id,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -101,12 +106,15 @@ export default class Trip extends Component {
       });
   };
 
-  // update = (newActivity) => {
-  //   this.setState({ activity });
-  // };
+  addActivity = (activity) => {
+    this.setState({ activities: [...this.state.activities, activity] });
+    console.log(
+      "activities added to trip.state.activities " + JSON.stringify(activity)
+    );
+  };
 
   render() {
-    let { trip, edit, add } = this.state;
+    let { trip, edit, add, activities } = this.state;
 
     return (
       <div>
@@ -126,11 +134,18 @@ export default class Trip extends Component {
               </div>
               <Button onClick={this.showEdit}>Edit Trip</Button>
               <br />
-              <AllActivities />
-              <br />
-              <Button onClick={this.showAdd}>Add Activity</Button>
               {edit && <EditTrip trip={trip} editTrip={this.editTrip} />}
-              {add && <AddActivity addActivity={this.AddActivity} />}
+              <br />
+              <AllActivities activities={activities} />
+              <br />
+              <Button onClick={this.showAdd}>Add More Activity</Button>
+              <br />
+              {add && (
+                <AddActivity
+                  addActivity={this.addActivity}
+                  trip_id={this.state.trip_id}
+                />
+              )}
             </div>
           ) : (
             "Loading..."

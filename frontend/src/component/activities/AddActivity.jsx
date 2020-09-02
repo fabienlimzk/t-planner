@@ -15,6 +15,7 @@ export default class AddActivity extends Component {
     address: "",
     description: "",
     image_url: "",
+    trip_id: this.props.trip_id,
     // status: false,
   };
 
@@ -30,6 +31,10 @@ export default class AddActivity extends Component {
       .then((res) => {
         console.log("done");
         // this.setState({ status: true });
+        // for Trip.jsx
+        console.log(JSON.stringify(res) + " saved");
+        console.log(JSON.stringify(res.data.savedActivity) + " savedddddd");
+        this.props.addActivity(res.data.savedActivity);
       })
       .catch((err) => {
         console.log(err);
@@ -120,12 +125,12 @@ export default class AddActivity extends Component {
               />
             </Row>
             <Button onClick={this.submitHandler}>Submit</Button>
-            <Map
+            {/* <Map
               google={this.props.google}
               center={{ lat: 1.2832, lng: 103.8466 }}
               height="300px"
               zoom={15}
-            />
+            /> */}
           </Container>
         </div>
       </div>
