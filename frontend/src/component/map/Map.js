@@ -17,13 +17,15 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      address: "",
-      city: "",
-      area: "",
-      state: "",
-      mapPosition: {
-        lat: this.props.center.lat,
-        lng: this.props.center.lng,
+      place: {
+        address: "",
+        city: "",
+        area: "",
+        state: "",
+        mapPosition: {
+          lat: this.props.center.lat,
+          lng: this.props.center.lng,
+        },
       },
       markerPosition: {
         lat: this.props.center.lat,
@@ -36,8 +38,8 @@ class Map extends React.Component {
    */
   componentDidMount() {
     Geocode.fromLatLng(
-      this.state.mapPosition.lat,
-      this.state.mapPosition.lng
+      this.state.place.mapPosition.lat,
+      this.state.place.mapPosition.lng
     ).then(
       (response) => {
         const address = response.results[0].formatted_address,
@@ -69,11 +71,11 @@ class Map extends React.Component {
    */
   shouldComponentUpdate(nextProps, nextState) {
     if (
-      this.state.markerPosition.lat !== this.props.center.lat ||
-      this.state.address !== nextState.address ||
-      this.state.city !== nextState.city ||
-      this.state.area !== nextState.area ||
-      this.state.state !== nextState.state
+      this.state.place.markerPosition.lat !== this.props.center.lat ||
+      this.state.place.address !== nextState.place.address ||
+      this.state.place.city !== nextState.place.city ||
+      this.state.place.area !== nextState.place.area ||
+      this.state.place.state !== nextState.place.state
     ) {
       return true;
     } else if (this.props.center.lat === nextProps.center.lat) {
@@ -167,17 +169,19 @@ class Map extends React.Component {
       lngValue = place.geometry.location.lng();
     // Set these values in the state.
     this.setState({
-      address: address ? address : "",
-      area: area ? area : "",
-      city: city ? city : "",
-      state: state ? state : "",
-      markerPosition: {
-        lat: latValue,
-        lng: lngValue,
-      },
-      mapPosition: {
-        lat: latValue,
-        lng: lngValue,
+      place: {
+        address: address ? address : "",
+        area: area ? area : "",
+        city: city ? city : "",
+        state: state ? state : "",
+        markerPosition: {
+          lat: latValue,
+          lng: lngValue,
+        },
+        mapPosition: {
+          lat: latValue,
+          lng: lngValue,
+        },
       },
     });
   };
@@ -188,33 +192,34 @@ class Map extends React.Component {
    *
    * @param event
    */
-  onMarkerDragEnd = (event) => {
-    // console.log("event", event);
-    let newLat = event.latLng.lat(),
-      newLng = event.latLng.lng(),
-      addressArray = [];
-    Geocode.fromLatLng(newLat, newLng).then(
-      (response) => {
-        const address = response.results[0].formatted_address,
-          addressArray = response.results[0].address_components,
-          city = this.getCity(addressArray),
-          area = this.getArea(addressArray),
-          state = this.getState(addressArray);
-        this.setState({
-          address: address ? address : "",
-          area: area ? area : "",
-          city: city ? city : "",
-          state: state ? state : "",
-        });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  };
+  // onMarkerDragEnd = (event) => {
+  //   // console.log("event", event);
+  //   let newLat = event.latLng.lat(),
+  //     newLng = event.latLng.lng(),
+  //     addressArray = [];
+  //   Geocode.fromLatLng(newLat, newLng).then(
+  //     (response) => {
+  //       const address = response.results[0].formatted_address,
+  //         addressArray = response.results[0].address_components,
+  //         city = this.getCity(addressArray),
+  //         area = this.getArea(addressArray),
+  //         state = this.getState(addressArray);
+  //       this.setState({
+  //         address: address ? address : "",
+  //         area: area ? area : "",
+  //         city: city ? city : "",
+  //         state: state ? state : "",
+  //       });
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // };
   render() {
-    console.log("lat", this.state.mapPosition.lat);
-    console.log("lng", this.state.mapPosition.lng);
+    console.log("lat", this.state.place.mapPosition.lat);
+    console.log("lng", this.state.place.mapPosition.lng);
+    console.log("place", this.state.place.mapPosition);
 
     const AsyncMap = withScriptjs(
       withGoogleMap((props) => (
@@ -242,8 +247,8 @@ class Map extends React.Component {
           <Marker
             google={this.props.google}
             name={"Dolores park"}
-            draggable={true}
-            onDragEnd={this.onMarkerDragEnd}
+            draggable={false}
+            // onDragEnd={this.onMarkerDragEnd}
             position={{
               lat: this.state.markerPosition.lat,
               lng: this.state.markerPosition.lng,
@@ -264,7 +269,7 @@ class Map extends React.Component {
               </span>
             </div>
           </InfoWindow>
-{/* SKATEPARKS */}
+          {/* SKATEPARKS */}
           {parksData.features.map((park) => (
             <Marker
               key={park.properties.park_ID}
@@ -273,7 +278,6 @@ class Map extends React.Component {
                 lng: park.geometry.coordinates[0],
               }}
             />
-
           ))}
         </GoogleMap>
       ))

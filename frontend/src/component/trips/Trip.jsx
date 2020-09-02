@@ -17,7 +17,16 @@ export default class Trip extends Component {
       start_date: "",
       end_date: "",
       duration: "",
-      address: "",
+      place: {
+        city: "",
+        area: "",
+        state: "",
+        address: "",
+        mapPosition: {
+          lat: "",
+          lng: "",
+        },
+      },
       description: "",
       image_url: "",
     },

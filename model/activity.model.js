@@ -6,7 +6,16 @@ const activitySchema = new mongoose.Schema(
     start_date: Date,
     end_date: Date,
     duration: String,
-    address: String,
+    place: { 
+      city: String,
+      area: String,
+      state: String,
+      address: String,
+      mapPosition: { 
+        lat: Number,
+        lng: Number
+      }
+    },
     description: String,
     image_url: String,
     createdBy: {
