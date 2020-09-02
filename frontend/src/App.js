@@ -1,3 +1,4 @@
+
 import React, { Component } from "react";
 import {
   Switch,
@@ -5,14 +6,16 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
+import Axios from "axios";
 import Home from "./component/Home";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
 import Navigation from "./component/Navigation";
-import Axios from "axios";
+
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
+
 import Trip from "./component/trips/Trip";
 import AddTrip from "./component/trips/AddTrip";
 import AllPackingLists from "./component/AllPackingLists";
@@ -23,6 +26,7 @@ import PrivateRoute from "./component/PrivateRoute";
 import { Alert } from "react-bootstrap";
 
 const URL = process.env.REACT_APP_URL;
+
 export default class App extends Component {
   state = {
     // activities: [],
@@ -164,6 +168,8 @@ export default class App extends Component {
     let { isAuth, user, errorMessage } = this.state;
 
     return (
+      <>
+
       <Router>
         <Navigation user={user} logout={this.logoutHandler} />
         {errorMessage && <Alert>{errorMessage}</Alert>}
@@ -173,6 +179,9 @@ export default class App extends Component {
             exact
             render={() => <Register register={this.registerHandler} />}
           />
+          <Route path="/activities" exact render={() => <AllActivities />} />
+          <Route path="/activity/add" exact render={() => <AddActivity />} />
+          <Route path="/activity/:id" component={Activity} />
           <Route
             path="/login"
             exact
@@ -231,6 +240,7 @@ export default class App extends Component {
           />
         </Switch>
       </Router>
+    </>
     );
   }
 }

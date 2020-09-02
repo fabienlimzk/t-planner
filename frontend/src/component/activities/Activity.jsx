@@ -110,7 +110,8 @@ export default class Activity extends Component {
                   activity={activity}
                   editActivity={this.editActivity}
                 />
-              )}
+                )}
+                
             </div>
           ) : (
             "Loading..."

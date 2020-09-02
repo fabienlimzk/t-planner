@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import SimpleMap from "./map/SimpleMap";
+import SearchBox from "./map/SearchBox";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -82,6 +84,9 @@ export default class Home extends Component {
               </Col>
             ))}
           </Row>
+          {/* <SearchBox /> */}
+          <h4>Scroll around the world</h4>
+          <SimpleMap />
         </Container>
         {/* ) : (
           "You cannot see this"
