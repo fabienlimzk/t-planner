@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Container } from "react-bootstrap";
 import Axios from "axios";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Map from "../map/Map";
 
 const URL = process.env.REACT_APP_URL;
@@ -12,19 +12,33 @@ export default class AddActivity extends Component {
     start_date: "",
     end_date: "",
     duration: "",
-    address: "",
-    description: "",
-    image_url: "",
-    trip_id: this.props.trip_id,
-    // status: false,
+    place: {
+      city: "",
+      area: "",
+      state: "",
+      address: "",
+      mapPosition: {
+        lat: 1.2832,
+        lng: 103.8466,
+      },
+      description: "",
+      image_url: "",
+      trip_id: this.props.trip_id,
+      // status: false,
+    },
   };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  updatePlace = (place) => {
+    this.setState({ place, trip_id: this.props.trip_id });
+  };
+
   submitHandler = () => {
     console.log(this.state);
+    // console.log(this.state);
     Axios.post(`${URL}/activities`, this.state, {
       headers: { "x-auth-token": localStorage.token },
     })
@@ -47,7 +61,7 @@ export default class AddActivity extends Component {
       start_date,
       end_date,
       duration,
-      address,
+      // place,
       description,
       image_url,
     } = this.state;
@@ -97,7 +111,7 @@ export default class AddActivity extends Component {
                 onChange={this.changeHandler}
               />
             </Row>
-            <Row>
+            {/* <Row>
               Address
               <Form.Control
                 name="address"
@@ -105,7 +119,7 @@ export default class AddActivity extends Component {
                 placeholder="Blk260 tampines st 21"
                 onChange={this.changeHandler}
               />
-            </Row>
+            </Row> */}
             <Row>
               Description
               <Form.Control
@@ -125,12 +139,15 @@ export default class AddActivity extends Component {
               />
             </Row>
             <Button onClick={this.submitHandler}>Submit</Button>
-            {/* <Map
+
+            <Map
               google={this.props.google}
               center={{ lat: 1.2832, lng: 103.8466 }}
-              height="300px"
+              height="650px"
               zoom={15}
-            /> */}
+              // setPlace={this.}
+              updatePlace={this.updatePlace}
+            />
           </Container>
         </div>
       </div>

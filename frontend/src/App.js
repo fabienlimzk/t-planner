@@ -75,8 +75,7 @@ export default class App extends Component {
       headers: { "x-auth-token": token },
     })
       .then((res) => {
-        console.log(res.data);
-
+        // console.log(res.data);
         this.setState({
           isAuth: true,
           user: res.data.user,

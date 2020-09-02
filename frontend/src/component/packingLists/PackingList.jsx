@@ -45,7 +45,7 @@ export default class PackingList extends Component {
 
   deletePackingList = (e) => {
     // this.props.deletePackingList(e.target.id);
-    console.log(this.props);
+    // console.log(this.props);
   };
   // deletePackingList = (e) => {
   //   console.log("trying to delete");
@@ -60,7 +60,7 @@ export default class PackingList extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ packingList: res.data.packingList });
       })
       .catch((err) => {

@@ -61,7 +61,7 @@ export default class Activity extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({ activity: res.data.activity });
       })
       .catch((err) => {
@@ -98,8 +98,8 @@ export default class Activity extends Component {
               <div>
                 <h3>{activity.title}</h3>
               </div>
-              <div>Start: {activity.start_date.split("T")[0]}</div>
-              <div>End: {activity.end_date.split("T")[0]}</div>
+              <div>Start: {activity.start_date ? activity.start_date.split("T")[0] : "" }</div>
+              <div>End: {activity.end_date ? activity.end_date.split("T")[0] : "" }</div>
               <div>Duration: {activity.duration}</div>
               <div>Address: {activity.address}</div>
               <div>Description: {activity.description}</div>
