@@ -43,7 +43,8 @@ export default class AllActivities extends Component {
   };
 
   componentDidMount() {
-    this.fetchActivities();
+    // this.fetchActivities();
+    this.setState({ activities: this.props.activities });
   }
 
   render() {

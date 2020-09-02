@@ -12,7 +12,9 @@ const checkToken = require("../config/config.js");
 router.get("/:id", checkToken, async (req, res) => {
   try {
     let user = await User.findById(req.params.id);
-    let trip = await Trip.findById(req.params.id).populate("createdBy");
+    let trip = await Trip.findById(req.params.id)
+      .populate("createdBy")
+      .populate("activities");
     res.status(200).json({
       message: "Trip found",
       trip,

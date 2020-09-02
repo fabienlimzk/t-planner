@@ -126,7 +126,7 @@ export default class Trip extends Component {
               </div>
               <Button onClick={this.showEdit}>Edit Trip</Button>
               <br />
-              <AllActivities />
+              <AllActivities activities={trip.activities} />
               <br />
               <Button onClick={this.showAdd}>Add Activity</Button>
               {edit && <EditTrip trip={trip} editTrip={this.editTrip} />}
