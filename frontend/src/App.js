@@ -9,12 +9,11 @@ import Axios from "axios";
 import Home from "./component/Home";
 import Register from "./component/auth/Register";
 import Login from "./component/auth/Login";
+import Profile from "./component/auth/Profile";
 import Navigation from "./component/Navigation";
-
 import AllActivities from "./component/AllActivities";
 import Activity from "./component/activities/Activity";
 import AddActivity from "./component/activities/AddActivity";
-
 import Trip from "./component/trips/Trip";
 import AddTrip from "./component/trips/AddTrip";
 import AllPackingLists from "./component/AllPackingLists";
@@ -190,6 +189,13 @@ export default class App extends Component {
                   <Login login={this.loginHandler} />
                 )
               }
+            />
+            <PrivateRoute
+              exact
+              path="/user/:id"
+              isAuth={isAuth}
+              component={Profile}
+              currentUser={user}
             />
             <PrivateRoute
               exact

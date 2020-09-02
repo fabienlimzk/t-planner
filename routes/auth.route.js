@@ -88,14 +88,40 @@ router.post("/login", async (req, res) => {
 
 router.get("/user", checkToken, async (req, res) => {
   try {
-    let user = await User.findById(req.user.id, "-password");
+    let user = await User.findById(req.user.id);
 
     res.status(200).json({
+      message: "User profile found",
       user,
     });
   } catch (error) {
     res.status(500).json({
       message: "Something is wrong!",
+    });
+  }
+});
+
+router.put("/user", checkToken, async (req, res) => {
+  try {
+    let editedUser = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      username: req.body.username,
+      email: req.body.email,
+      // password: req.body.password,
+    };
+
+    let user = await User.findByIdAndUpdate(req.user.id, editedUser);
+
+    if (user) {
+      res.status(200).json({
+        message: "User has been editied",
+        user,
+      });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: "Something went wrong",
     });
   }
 });
