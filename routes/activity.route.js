@@ -109,18 +109,21 @@ router.post("/", checkToken, async (req, res) => {
     });
 
     let savedActivity = await activity.save();
-    // TODO
+
     if (savedActivity) {
-      let trip = await Trip.findOne();
-      console.log(trip._id);
-      await Trip.findByIdAndUpdate(trip._id, {
-        $push: { activities: activity._id },
-      }).then(() => {
-        console.log("added " + activity._id + " into " + trip._id);
-        res.status(201).json({
-          message: "post works",
+      let trip = await Trip.findOne({ _id: req.body.trip_id });
+      console.log("this trip id is " + trip);
+      await trip
+        .update({
+          $push: { activities: activity._id },
+        })
+        .then(() => {
+          console.log("added " + activity._id + " into " + trip._id);
+          res.status(201).json({
+            message: "post works",
+            savedActivity,
+          });
         });
-      });
     }
   } catch (error) {
     console.log(error);

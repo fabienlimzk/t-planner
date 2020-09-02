@@ -10,21 +10,21 @@ export default class AllActivities extends Component {
     activities: [],
   };
 
-  fetchActivities = () => {
-    let token = localStorage.getItem("token");
+  // fetchActivities = () => {
+  //   let token = localStorage.getItem("token");
 
-    Axios.get(`${URL}/activities`, {
-      headers: {
-        "x-auth-token": token,
-      },
-    })
-      .then((res) => {
-        this.setState({ activities: res.data.activities });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  //   Axios.get(`${URL}/activities`, {
+  //     headers: {
+  //       "x-auth-token": token,
+  //     },
+  //   })
+  //     .then((res) => {
+  //       this.setState({ activities: res.data.activities });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   deleteActivity = (e) => {
     const id = e.target.id;
@@ -47,6 +47,14 @@ export default class AllActivities extends Component {
     this.setState({ activities: this.props.activities });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.activities !== this.props.activities) {
+      this.setState({
+        activities: this.props.activities,
+      });
+    }
+  }
+
   render() {
     // console.log(this.props.activities);
     return (
@@ -65,7 +73,6 @@ export default class AllActivities extends Component {
                     <div>{activity.description}</div>
                     <div>
                       <Link to={`/activity/${activity._id}`}>View</Link>
-
                       <Button
                         onClick={this.deleteActivity}
                         variant="danger"

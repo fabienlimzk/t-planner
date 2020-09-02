@@ -45,52 +45,51 @@ export default class Home extends Component {
   }
 
   render() {
-    // console.log(this.props.trips);
     return (
       <div>
         <h1>Trips</h1>
-        {/* {currentUser == user.id ? ( */}
         <Container fluid>
           <Row>
-            {this.state.trips.map((trip) => (
-              <Col key={trip._id} md="3">
-                <Card>
-                  <Card.Body>
-                    <div>
-                      <h4>{trip.title}</h4>
-                    </div>
-                    <div>
-                      <Badge variant="primary">{trip.country}</Badge>
-                    </div>
-                    <div>
-                      <Badge variant="info">{trip.start_date}</Badge> to
-                      <Badge variant="info">{trip.end_date}</Badge>
-                    </div>
-                    <div>{trip.description}</div>
-                    <div>
-                      <Link to={`/trip/${trip._id}`}>View</Link>
-                      <Button
-                        onClick={this.deleteTrip}
-                        variant="danger"
-                        size="sm"
-                        id={trip._id}
-                        style={{ float: "right" }}
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
+            {this.state.trips.map((trip) =>
+              trip.createdBy._id === this.props.currentUser._id ? (
+                <Col key={trip._id} md="3">
+                  <Card>
+                    <Card.Body>
+                      <div>
+                        <h4>{trip.title}</h4>
+                      </div>
+                      <div>
+                        <Badge variant="primary">{trip.country}</Badge>
+                      </div>
+                      <div>
+                        <Badge variant="info">{trip.start_date}</Badge> to
+                        <Badge variant="info">{trip.end_date}</Badge>
+                      </div>
+                      <div>{trip.description}</div>
+                      <div>
+                        <Link to={`/trip/${trip._id}`}>View</Link>
+                        <Button
+                          onClick={this.deleteTrip}
+                          variant="danger"
+                          size="sm"
+                          id={trip._id}
+                          style={{ float: "right" }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ) : (
+                ""
+              )
+            )}
           </Row>
           {/* <SearchBox /> */}
-          <h4>Scroll around the world</h4>
-          <SimpleMap />
+          {/* <h4>Scroll around the world</h4> */}
+          {/* <SimpleMap /> */}
         </Container>
-        {/* ) : (
-          "You cannot see this"
-        )} */}
       </div>
     );
   }
