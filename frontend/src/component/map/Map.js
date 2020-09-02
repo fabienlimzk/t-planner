@@ -18,18 +18,18 @@ class Map extends React.Component {
     super(props);
     this.state = {
       place: {
-        address: "",
         city: "",
         area: "",
         state: "",
+        address: "",
         mapPosition: {
+          lat: 1.2832,
+          lng: 103.8466,
+        },
+        markerPosition: {
           lat: this.props.center.lat,
           lng: this.props.center.lng,
         },
-      },
-      markerPosition: {
-        lat: this.props.center.lat,
-        lng: this.props.center.lng,
       },
     };
   }
@@ -38,8 +38,10 @@ class Map extends React.Component {
    */
   componentDidMount() {
     Geocode.fromLatLng(
-      this.state.place.mapPosition.lat,
-      this.state.place.mapPosition.lng
+      this.state.place.markerPosition.lat,
+      this.state.place.markerPosition.lng
+      // this.state.place.mapPosition.lat,
+      // this.state.place.mapPosition.lng
     ).then(
       (response) => {
         const address = response.results[0].formatted_address,
@@ -50,12 +52,12 @@ class Map extends React.Component {
 
         // console.log("city", city, area, state);
 
-        this.setState({
-          address: address ? address : "",
-          area: area ? area : "",
-          city: city ? city : "",
-          state: state ? state : "",
-        });
+        // this.setState({
+        // address: address ? address : "",
+        // area: area ? area : "",
+        // city: city ? city : "",
+        // state: state ? state : "",
+        // });
       },
       (error) => {
         console.error(error);
@@ -70,13 +72,7 @@ class Map extends React.Component {
    * @return {boolean}
    */
   shouldComponentUpdate(nextProps, nextState) {
-    if (
-      this.state.place.markerPosition.lat !== this.props.center.lat ||
-      this.state.place.address !== nextState.place.address ||
-      this.state.place.city !== nextState.place.city ||
-      this.state.place.area !== nextState.place.area ||
-      this.state.place.state !== nextState.place.state
-    ) {
+    if (this.state != nextState) {
       return true;
     } else if (this.props.center.lat === nextProps.center.lat) {
       return false;
@@ -167,23 +163,24 @@ class Map extends React.Component {
       state = this.getState(addressArray),
       latValue = place.geometry.location.lat(),
       lngValue = place.geometry.location.lng();
-    // Set these values in the state.
-    this.setState({
-      place: {
-        address: address ? address : "",
-        area: area ? area : "",
-        city: city ? city : "",
-        state: state ? state : "",
-        markerPosition: {
-          lat: latValue,
-          lng: lngValue,
-        },
-        mapPosition: {
-          lat: latValue,
-          lng: lngValue,
-        },
+
+    const newplace = {
+      address,
+      city,
+      area,
+      state,
+      mapPosition: {
+        lat: latValue,
+        lng: lngValue,
       },
-    });
+      markerPosition: {
+        lat: latValue,
+        lng: lngValue,
+      },
+    };
+    // Set these values in the state.
+    this.setState({ place: newplace });
+    this.props.updatePlace(newplace);
   };
   /**
    * When the marker is dragged you get the lat and long using the functions available from event object.
@@ -216,10 +213,11 @@ class Map extends React.Component {
   //     }
   //   );
   // };
+  
   render() {
-    console.log("lat", this.state.place.mapPosition.lat);
-    console.log("lng", this.state.place.mapPosition.lng);
-    console.log("place", this.state.place.mapPosition);
+    // console.log("lat", this.state.place.mapPosition.lat);
+    // console.log("lng", this.state.place.mapPosition.lng);
+    // console.log("place", this.state.place.mapPosition);
 
     const AsyncMap = withScriptjs(
       withGoogleMap((props) => (
@@ -227,8 +225,8 @@ class Map extends React.Component {
           google={this.props.google}
           defaultZoom={this.props.zoom}
           defaultCenter={{
-            lat: this.state.mapPosition.lat,
-            lng: this.state.mapPosition.lng,
+            lat: this.state.place.mapPosition.lat,
+            lng: this.state.place.mapPosition.lng,
           }}
         >
           {/* For Auto complete Search Box */}
@@ -250,8 +248,8 @@ class Map extends React.Component {
             draggable={false}
             // onDragEnd={this.onMarkerDragEnd}
             position={{
-              lat: this.state.markerPosition.lat,
-              lng: this.state.markerPosition.lng,
+              lat: this.state.place.markerPosition.lat,
+              lng: this.state.place.markerPosition.lng,
             }}
           />
           <Marker />
@@ -259,8 +257,8 @@ class Map extends React.Component {
           <InfoWindow
             onClose={this.onInfoWindowClose}
             position={{
-              lat: this.state.markerPosition.lat + 0.0018,
-              lng: this.state.markerPosition.lng,
+              lat: this.state.place.markerPosition.lat + 0.0018,
+              lng: this.state.place.markerPosition.lng,
             }}
           >
             <div>
@@ -295,7 +293,7 @@ class Map extends React.Component {
                 className="form-control"
                 onChange={this.onChange}
                 readOnly="readOnly"
-                value={this.state.city}
+                value={this.state.place.city}
               />
             </div>
             <div className="form-group">
@@ -306,7 +304,7 @@ class Map extends React.Component {
                 className="form-control"
                 onChange={this.onChange}
                 readOnly="readOnly"
-                value={this.state.area}
+                value={this.state.place.area}
               />
             </div>
             <div className="form-group">
@@ -317,7 +315,7 @@ class Map extends React.Component {
                 className="form-control"
                 onChange={this.onChange}
                 readOnly="readOnly"
-                value={this.state.state}
+                value={this.state.place.state}
               />
             </div>
             <div className="form-group">
@@ -328,7 +326,7 @@ class Map extends React.Component {
                 className="form-control"
                 onChange={this.onChange}
                 readOnly="readOnly"
-                value={this.state.address}
+                value={this.state.place.address}
               />
             </div>
           </div>

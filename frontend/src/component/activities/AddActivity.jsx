@@ -14,27 +14,30 @@ export default class AddActivity extends Component {
     duration: "",
     place: {
       city: "",
-      area: "", 
+      area: "",
       state: "",
       address: "",
-      lat: "",
-      lng: "",
+      mapPosition: {
+        lat: 1.2832,
+        lng: 103.8466,
+      },
+      description: "",
+      image_url: "",
+      trip_id: this.props.trip_id,
+      // status: false,
     },
-    description: "",
-    image_url: "",
-    trip_id: this.props.trip_id,
-    // status: false,
   };
 
   changeHandler = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  updatePlace = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  updatePlace = (place) => {
+    this.setState({ place, trip_id: this.props.trip_id });
   };
 
   submitHandler = () => {
+    console.log(this.state);
     // console.log(this.state);
     Axios.post(`${URL}/activities`, this.state, {
       headers: { "x-auth-token": localStorage.token },
@@ -51,8 +54,6 @@ export default class AddActivity extends Component {
         console.log(err);
       });
   };
-
-
 
   render() {
     let {

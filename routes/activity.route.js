@@ -86,20 +86,15 @@ router.delete("/:id", async (req, res) => {
     @access public
 */
 router.post("/", checkToken, async (req, res) => {
+  console.log("================");
+  console.log(req.body);
   try {
     let {
       title,
       start_date,
       end_date,
       duration,
-      place: {
-        city,
-        area, 
-        state,
-        address,
-        lat,
-        lng,
-      },
+      place,
       description,
       image_url,
     } = req.body;
@@ -109,18 +104,13 @@ router.post("/", checkToken, async (req, res) => {
       start_date,
       end_date,
       duration,
-      place: {
-        city,
-        area, 
-        state,
-        address,
-        lat,
-        lng,
-      },
+      place,
       description,
       image_url,
       createdBy: req.user.id,
     });
+
+    activity.place.mapPosition = req.body.place.mapPosition;
 
     let savedActivity = await activity.save();
 
