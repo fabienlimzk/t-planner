@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+
 //== add all middlewares
 require("./config/db"); // calls mongoose connection to clean this file
 app.use(express.json()); // allows me to receive JSON files from HEADER of REQUEST
