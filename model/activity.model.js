@@ -3,9 +3,14 @@ const mongoose = require("mongoose");
 const activitySchema = new mongoose.Schema(
   {
     title: String,
-    start_date: Date,
-    end_date: Date,
-    duration: String,
+    start_date: {
+      type: Date,
+      required: true,
+    },
+    end_date: {
+      type: Date,
+      required: true,
+    },
     place: { 
       city: String,
       area: String,

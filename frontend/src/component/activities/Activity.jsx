@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Axios from "axios";
 import EditActivity from "./EditActivity";
 import { Container, Button } from "react-bootstrap";
+import SingleMap from "../map/SingleMap";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -48,14 +49,6 @@ export default class Activity extends Component {
     console.log(this.props);
   };
 
-  // deleteActivity = (e) => {
-  //   console.log("trying to delete");
-  //   Axios.delete(`${URL}/activities/${e.target.id}`).then((res) => {
-  //     console.log("deleted");
-  //     this.fetchActivities();
-  //   });
-  // };
-
   getActivity = () => {
     Axios.get(`${URL}/activities/${this.props.match.params.id}`, {
       headers: { "x-auth-token": localStorage.token },
@@ -78,21 +71,6 @@ export default class Activity extends Component {
     return (
       <div>
         <Container>
-          {/* 
-          {activity ? (
-            <div>
-              <EditActivity
-                activity={activity}
-                editActivity={this.editActivity}
-              />
-            </div>
-          ) : (
-            "testing testing"
-          )}
-          <Button variant="danger" onClick={this.deleteActivity}>
-            Delete Activity
-          </Button> */}
-
           {activity ? (
             <div>
               <div>
@@ -103,14 +81,25 @@ export default class Activity extends Component {
               <div>Duration: {activity.duration}</div>
               <div>Address: {activity.address}</div>
               <div>Description: {activity.description}</div>
-              <div>{activity.image_url}</div>
+              <div>
+
+              <img src={activity.image_url} alt=""/>
+              </div>
               <Button onClick={this.showEdit}>Edit Activity</Button>
               {edit && (
                 <EditActivity
                   activity={activity}
                   editActivity={this.editActivity}
+                  />
+                  )}
+                <SingleMap
+                google={this.props.google}
+                height="650px"
+                zoom={2}
+                // updatePlace={this.updatePlace}
+                activity={activity}
                 />
-                )}
+  
                 
             </div>
           ) : (

@@ -7,7 +7,6 @@ const tripSchema = new mongoose.Schema(
     country: String,
     start_date: String,
     end_date: String,
-    // duration: String,
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -24,10 +23,6 @@ const tripSchema = new mongoose.Schema(
         ref: "Activity",
       },
     ],
-    // packingLists: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    //   ref: "PackingList",
-    // },
   },
   {
     timestamps: true,

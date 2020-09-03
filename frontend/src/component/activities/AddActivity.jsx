@@ -37,7 +37,7 @@ export default class AddActivity extends Component {
   };
 
   submitHandler = () => {
-    console.log(this.state);
+    // console.log(this.state);
     // console.log(this.state);
     Axios.post(`${URL}/activities`, this.state, {
       headers: { "x-auth-token": localStorage.token },
@@ -46,8 +46,8 @@ export default class AddActivity extends Component {
         console.log("done");
         // this.setState({ status: true });
         // for Trip.jsx
-        console.log(JSON.stringify(res) + " saved");
-        console.log(JSON.stringify(res.data.savedActivity) + " savedddddd");
+        // console.log(JSON.stringify(res) + " saved");
+        // console.log(JSON.stringify(res.data.savedActivity) + " savedddddd");
         this.props.addActivity(res.data.savedActivity);
       })
       .catch((err) => {
@@ -111,15 +111,6 @@ export default class AddActivity extends Component {
                 onChange={this.changeHandler}
               />
             </Row>
-            {/* <Row>
-              Address
-              <Form.Control
-                name="address"
-                value={address}
-                placeholder="Blk260 tampines st 21"
-                onChange={this.changeHandler}
-              />
-            </Row> */}
             <Row>
               Description
               <Form.Control
@@ -142,11 +133,13 @@ export default class AddActivity extends Component {
 
             <Map
               google={this.props.google}
-              center={{ lat: 1.2832, lng: 103.8466 }}
+              center={{ lat:15.7076, lng:104.1920275 }} //vietnam
+              // center={{ lat: 1.2832, lng: 103.8466 }}
               height="650px"
-              zoom={15}
+              zoom={6.26}
               // setPlace={this.}
               updatePlace={this.updatePlace}
+              activities={this.props.activities}
             />
           </Container>
         </div>

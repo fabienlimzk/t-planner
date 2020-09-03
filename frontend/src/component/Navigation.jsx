@@ -5,7 +5,16 @@ import { Link } from "react-router-dom";
 function Navigation({ user, logout }) {
   return (
     <Navbar bg="dark" expand="lg">
-      <Navbar.Brand href="/">T-Planner</Navbar.Brand>
+      <Navbar.Brand href="/">
+        <img
+          alt=""
+          src="/logo.png"
+          width="45"
+          height="35"
+          className="d-inline-block align-top"
+          />
+          T-Planner
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -14,12 +23,6 @@ function Navigation({ user, logout }) {
           </Link>
           <Link className="nav-link" to="/trip/add">
             Add Trip
-          </Link>
-          <Link className="nav-link" to="/activities">
-            Activities
-          </Link>
-          <Link className="nav-link" to="/activity/add">
-            Add Activity
           </Link>
           <Link className="nav-link" to="/packingLists">
             Packing List

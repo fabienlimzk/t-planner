@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   withGoogleMap,
@@ -8,7 +9,6 @@ import {
 } from "react-google-maps";
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
-import * as parksData from "../map/skateboard-parks.json";
 
 Geocode.enableDebug();
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
@@ -49,15 +49,7 @@ class Map extends React.Component {
           city = this.getCity(addressArray),
           area = this.getArea(addressArray),
           state = this.getState(addressArray);
-
         // console.log("city", city, area, state);
-
-        // this.setState({
-        // address: address ? address : "",
-        // area: area ? area : "",
-        // city: city ? city : "",
-        // state: state ? state : "",
-        // });
       },
       (error) => {
         console.error(error);
@@ -183,40 +175,13 @@ class Map extends React.Component {
     this.props.updatePlace(newplace);
   };
   /**
-   * When the marker is dragged you get the lat and long using the functions available from event object.
-   * Use geocode to get the address, city, area and state from the lat and lng positions.
-   * And then set those values in the state.
    *
    * @param event
    */
-  // onMarkerDragEnd = (event) => {
-  //   // console.log("event", event);
-  //   let newLat = event.latLng.lat(),
-  //     newLng = event.latLng.lng(),
-  //     addressArray = [];
-  //   Geocode.fromLatLng(newLat, newLng).then(
-  //     (response) => {
-  //       const address = response.results[0].formatted_address,
-  //         addressArray = response.results[0].address_components,
-  //         city = this.getCity(addressArray),
-  //         area = this.getArea(addressArray),
-  //         state = this.getState(addressArray);
-  //       this.setState({
-  //         address: address ? address : "",
-  //         area: area ? area : "",
-  //         city: city ? city : "",
-  //         state: state ? state : "",
-  //       });
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // };
-  
+
   render() {
-    // console.log("lat", this.state.place.mapPosition.lat);
-    // console.log("lng", this.state.place.mapPosition.lng);
+    console.log("lat", this.state.place.mapPosition.lat);
+    console.log("lng", this.state.place.mapPosition.lng);
     // console.log("place", this.state.place.mapPosition);
 
     const AsyncMap = withScriptjs(
@@ -254,88 +219,90 @@ class Map extends React.Component {
           />
           <Marker />
           {/* InfoWindow on top of marker */}
-          <InfoWindow
+          {/* <InfoWindow
             onClose={this.onInfoWindowClose}
             position={{
               lat: this.state.place.markerPosition.lat + 0.0018,
               lng: this.state.place.markerPosition.lng,
             }}
-          >
-            <div>
+          > */}
+            {/* <div>
               <span style={{ padding: 0, margin: 0 }}>
                 {this.state.address}
               </span>
             </div>
-          </InfoWindow>
-          {/* SKATEPARKS */}
-          {parksData.features.map((park) => (
+          </InfoWindow> */}
+          {this.props.activities.map((point) => (
             <Marker
-              key={park.properties.park_ID}
+              key={point._id}
               position={{
-                lat: park.geometry.coordinates[1],
-                lng: park.geometry.coordinates[0],
+                lat: point.place.mapPosition.lat,
+                lng: point.place.mapPosition.lng,
               }}
             />
           ))}
+          
         </GoogleMap>
       ))
     );
+
     let map;
     if (this.props.center.lat !== undefined) {
       map = (
         <div>
           <div>
             <div className="form-group">
-              <label htmlFor="">City</label>
-              <input
-                type="text"
-                name="city"
-                className="form-control"
-                onChange={this.onChange}
-                readOnly="readOnly"
-                value={this.state.place.city}
+              <AsyncMap
+                googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
+                loadingElement={<div style={{ height: `100%` }} />}
+                containerElement={<div style={{ height: this.props.height }} />}
+                mapElement={<div style={{ height: `100%` }} />}
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="">Area</label>
-              <input
-                type="text"
-                name="area"
-                className="form-control"
-                onChange={this.onChange}
-                readOnly="readOnly"
-                value={this.state.place.area}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="">State</label>
-              <input
-                type="text"
-                name="state"
-                className="form-control"
-                onChange={this.onChange}
-                readOnly="readOnly"
-                value={this.state.place.state}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="">Address</label>
-              <input
-                type="text"
-                name="address"
-                className="form-control"
-                onChange={this.onChange}
-                readOnly="readOnly"
-                value={this.state.place.address}
-              />
-            </div>
+            <br />
+            <label htmlFor="">City</label>
+            <input
+              type="text"
+              name="city"
+              className="form-control"
+              onChange={this.onChange}
+              readOnly="readOnly"
+              value={this.state.place.city}
+            />
           </div>
-          <AsyncMap
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_API_KEY}&libraries=places`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: this.props.height }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-          />
+          <div className="form-group">
+            <label htmlFor="">Area</label>
+            <input
+              type="text"
+              name="area"
+              className="form-control"
+              onChange={this.onChange}
+              readOnly="readOnly"
+              value={this.state.place.area}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="">State</label>
+            <input
+              type="text"
+              name="state"
+              className="form-control"
+              onChange={this.onChange}
+              readOnly="readOnly"
+              value={this.state.place.state}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="">Address</label>
+            <input
+              type="text"
+              name="address"
+              className="form-control"
+              onChange={this.onChange}
+              readOnly="readOnly"
+              value={this.state.place.address}
+            />
+          </div>
         </div>
       );
     } else {
@@ -345,3 +312,4 @@ class Map extends React.Component {
   }
 }
 export default Map;
+

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Axios from "axios";
 import { Container, Button, Row, Card, Col, Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Map from "./map/Map";
 import SimpleMap from "./map/SimpleMap";
-import SearchBox from "./map/SearchBox";
+// import SearchBox from "./map/SearchBox";
 
 const URL = process.env.REACT_APP_URL;
 
@@ -87,8 +88,18 @@ export default class Home extends Component {
             )}
           </Row>
           {/* <SearchBox /> */}
-          <h4>Scroll around the world</h4>
-          <SimpleMap />
+          <h4>Places pinned</h4>
+          {/* <SimpleMap /> */}
+          {/* <SingleMap
+              google={this.props.google}
+              center={{ lat:15.7076, lng:104.1920275 }} //vietnam
+              // center={{ lat:33.0912, lng: 19.5466 }}
+              height="650px"
+              zoom={2}
+              updatePlace={this.updatePlace}
+              activities={this.props.activities}
+            /> */}
+
         </Container>
       </div>
     );
