@@ -131,14 +131,13 @@ export default class Trip extends Component {
           {trip ? (
             <div>
               <div>
-                <h1>Trip</h1>
                 <div>
                   <h3>{trip.title}</h3>
                 </div>
-                <div>{trip.description}</div>
-                <div>{trip.country}</div>
-                <div>{trip.start_date}</div>
-                <div>{trip.end_date}</div>
+                <div>Description: {trip.description}</div>
+                <div>Country: {trip.country}</div>
+                <div>Start Date: {trip.start_date}</div>
+                <div>End Date: {trip.end_date}</div>
                 <div>Created By: {trip.createdBy.username}</div>
               </div>
               <Button onClick={this.showEdit}>Edit Trip</Button>
@@ -152,6 +151,8 @@ export default class Trip extends Component {
               {add && (
                 <AddActivity
                   addActivity={this.addActivity}
+                  activities={this.state.activities}
+                  activity={this.state.trip.activities}
                   trip_id={this.state.trip_id}
                 />
               )}

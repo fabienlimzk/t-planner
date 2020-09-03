@@ -10,22 +10,6 @@ export default class AllActivities extends Component {
     activities: [],
   };
 
-  // fetchActivities = () => {
-  //   let token = localStorage.getItem("token");
-
-  //   Axios.get(`${URL}/activities`, {
-  //     headers: {
-  //       "x-auth-token": token,
-  //     },
-  //   })
-  //     .then((res) => {
-  //       this.setState({ activities: res.data.activities });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   deleteActivity = (e) => {
     const id = e.target.id;
     // console.log(e.target.id);

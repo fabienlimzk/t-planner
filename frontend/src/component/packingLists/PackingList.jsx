@@ -47,13 +47,6 @@ export default class PackingList extends Component {
     // this.props.deletePackingList(e.target.id);
     // console.log(this.props);
   };
-  // deletePackingList = (e) => {
-  //   console.log("trying to delete");
-  //   Axios.delete(`${URL}/packingLists/${e.target.id}`).then((res) => {
-  //     console.log("deleted");
-  //     this.fetchPackingLists();
-  //   });
-  // };
 
   getPackingList = () => {
     Axios.get(`${URL}/packingLists/${this.props.match.params.id}`, {
@@ -106,3 +99,5 @@ export default class PackingList extends Component {
     );
   }
 }
+
+

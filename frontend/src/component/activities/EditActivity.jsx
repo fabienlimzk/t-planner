@@ -18,10 +18,7 @@ export default class EditActivity extends Component {
     // console.log(e.target.value);
   };
 
-  submitHandler = () => {
-    this.props.editActivity(this.state, this.props.activity._id);
-  };
-
+ 
   componentDidMount = () => {
     this.setState(this.props.activity);
   };

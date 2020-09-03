@@ -76,3 +76,43 @@ export default class AllPackingLists extends Component {
     );
   }
 }
+
+//45.44
+// markComplete={this.markComplete}
+
+// markComplete=(id)=>{
+// this.setState({packingList: this.state.todos.map(packingList)=>{
+//   if(packingList.id === id){
+//     packingList.completed = !packingList.conpleted
+//   }
+//   return packingList
+// }})
+// }
+
+// const {id, title} = this.props.packingList
+
+// <input type="checkbox" onChange={this.props.markComplete.bind(this.props.items/desctipion)}/> {' '}
+// // props packign items
+
+// const btnStyle = {
+//   background: "ff0000",
+//   color: "#fff",
+//   border: "none",
+//   padding: "5px 10px",
+//   borderRadius: "50%",
+//   cursor: "pointer",
+//   float: "right",
+// };
+
+// style={btnStyle}
+
+// getStyle = () =>{
+//   return {
+//     textDecoration : this.PaymentResponse.packingList.completed ? 
+//     "line-through" :"none"
+//   }
+// }
+
+// <div style={this.getStyle()}>
+
+// </div>

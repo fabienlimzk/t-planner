@@ -35,39 +35,6 @@ export default class App extends Component {
     user: null,
   };
 
-  // fetchActivities = () => {
-  //   Axios.get(`${URL}/activities`)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       this.setState({ activities: res.data.activities });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // fetchTrips = () => {
-  //   Axios.get(`${URL}/trips`)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       this.setState({ trips: res.data.trips });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
-  // fetchPackingLists = () => {
-  //   Axios.get(`${URL}/packingLists`)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       this.setState({ packingLists: res.data.packingLists });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
-
   // auth
   getUserProfile = (token) => {
     Axios.get(`${URL}/auth/user`, {
@@ -176,9 +143,6 @@ export default class App extends Component {
               exact
               render={() => <Register register={this.registerHandler} />}
             />
-            {/* <Route path="/activities" exact render={() => <AllActivities />} /> */}
-            {/* <Route path="/activity/add" exact render={() => <AddActivity />} />
-            <Route path="/activity/:id" component={Activity} /> */}
             <Route
               path="/login"
               exact
