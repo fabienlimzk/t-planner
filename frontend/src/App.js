@@ -59,7 +59,7 @@ export default class App extends Component {
     //login here
     Axios.post(`${URL}/auth/login`, credentials)
       .then((res) => {
-        console.log(res.data);
+        console.log("User logged in");
 
         localStorage.setItem("token", res.data.token);
         this.getUserProfile(res.data.token); //get uptodate user information
@@ -130,7 +130,7 @@ export default class App extends Component {
 
   render() {
     let { isAuth, user, errorMessage } = this.state;
-    console.log("this belongs to the user logined " + user);
+    // console.log("this belongs to the user logined" + );
 
     return (
       <>
@@ -141,7 +141,13 @@ export default class App extends Component {
             <Route
               path="/register"
               exact
-              render={() => <Register register={this.registerHandler} />}
+              render={() => 
+                isAuth ? (
+                  <Redirect to="/" />
+                ) : (
+                <Register register={this.registerHandler} />
+                )
+              }
             />
             <Route
               path="/login"

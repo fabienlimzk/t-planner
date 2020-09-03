@@ -73,9 +73,11 @@ export default class PackingList extends Component {
           <h1>Packing List</h1>
           {packingList ? (
             <div>
-              <h3>{packingList.title}</h3>
+              <h3>For: {packingList.title}</h3>
               {packingList.items.map((item, index) => (
                 <div>
+                  <br />
+                  <h3>Items to pack: </h3>
                   <ListGroup>
                     <ListGroup.Item as="li" key={index}>
                       {item}

@@ -86,8 +86,8 @@ router.delete("/:id", async (req, res) => {
     @access public
 */
 router.post("/", checkToken, async (req, res) => {
-  console.log("================");
-  console.log(req.body);
+  // console.log("================");
+  // console.log(req.body);
   try {
     let {
       title,
@@ -116,13 +116,13 @@ router.post("/", checkToken, async (req, res) => {
 
     if (savedActivity) {
       let trip = await Trip.findOne({ _id: req.body.trip_id });
-      console.log("this trip id is " + trip);
+      // console.log("this trip id is " + trip);
       await trip
         .update({
           $push: { activities: activity._id },
         })
         .then(() => {
-          console.log("added " + activity._id + " into " + trip._id);
+          // console.log("added " + activity._id + " into " + trip._id);
           res.status(201).json({
             message: "post works",
             savedActivity,

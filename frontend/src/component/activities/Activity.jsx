@@ -46,7 +46,7 @@ export default class Activity extends Component {
 
   deleteActivity = (e) => {
     // this.props.deleteActivity(e.target.id);
-    console.log(this.props);
+    // console.log(this.props);
   };
 
   getActivity = () => {

@@ -25,7 +25,7 @@ class AddTrip extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log("done");
+        // console.log("done");
         this.setState({ status: true });
       })
       .catch((err) => {

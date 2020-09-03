@@ -23,7 +23,7 @@ export default class AddPackingList extends Component {
 
   removeHandler = (index) => {
     this.state.items.splice(index, 1);
-    console.log(this.state.items, "----");
+    // console.log(this.state.items, "----");
     this.setState({ items: this.state.items });
   };
 
@@ -33,7 +33,7 @@ export default class AddPackingList extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log("done");
+        // console.log("done");
         this.setState({ status: true });
       })
       .catch((err) => {
@@ -49,7 +49,7 @@ export default class AddPackingList extends Component {
     let { title, items } = this.state;
 
     if (this.state.status) {
-      return <Redirect to="/" />;
+      return <Redirect to="/packingLists" />;
     }
 
     return (

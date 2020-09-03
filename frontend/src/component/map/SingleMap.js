@@ -17,7 +17,7 @@ class Map extends React.Component {
     super(props);
   }
   componentDidMount() {
-    console.log(this.props);
+    // console.log(this.props);
     Geocode.fromLatLng(
       this.props.activity.place.mapPosition.lat,
       this.props.activity.place.mapPosition.lng
