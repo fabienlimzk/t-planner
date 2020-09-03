@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/t-planner/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/t-planner/static/js/main.266f9775.chunk.js",
+    "main.js.map": "/t-planner/static/js/main.266f9775.chunk.js.map",
+    "runtime-main.js": "/t-planner/static/js/runtime-main.13aadab9.js",
+    "runtime-main.js.map": "/t-planner/static/js/runtime-main.13aadab9.js.map",
+    "static/css/2.11829350.chunk.css": "/t-planner/static/css/2.11829350.chunk.css",
+    "static/js/2.33d285ac.chunk.js": "/t-planner/static/js/2.33d285ac.chunk.js",
+    "static/js/2.33d285ac.chunk.js.map": "/t-planner/static/js/2.33d285ac.chunk.js.map",
+    "index.html": "/t-planner/index.html",
+    "precache-manifest.5ae86ca19088cf368a54ec2d53a7601a.js": "/t-planner/precache-manifest.5ae86ca19088cf368a54ec2d53a7601a.js",
+    "service-worker.js": "/t-planner/service-worker.js",
+    "static/css/2.11829350.chunk.css.map": "/t-planner/static/css/2.11829350.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/t-planner/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.33d285ac.chunk.js.LICENSE.txt": "/t-planner/static/js/2.33d285ac.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.13aadab9.js",
+    "static/css/2.11829350.chunk.css",
+    "static/js/2.33d285ac.chunk.js",
+    "static/css/main.5ecd60fb.chunk.css",
+    "static/js/main.266f9775.chunk.js"
+  ]
+}
