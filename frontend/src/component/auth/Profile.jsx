@@ -54,7 +54,7 @@ export default class Profile extends Component {
       }
     )
       .then((res) => {
-        console.log("done");
+        // console.log("done");
         this.getUserProfile(token);
         this.setState({ status: true });
       })
@@ -79,7 +79,7 @@ export default class Profile extends Component {
 
   render() {
     let { firstname, lastname, username, email } = this.state;
-    console.log(this.state);
+    // console.log(this.state);
 
     if (this.state.status) {
       return <Redirect to="/" />;

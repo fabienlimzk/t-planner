@@ -3,7 +3,6 @@ import Axios from "axios";
 import EditTrip from "./EditTrip";
 import AddActivity from "../activities/AddActivity";
 import { Container, Button } from "react-bootstrap";
-import { Redirect } from "react-router-dom";
 import AllActivities from "../AllActivities";
 
 const URL = process.env.REACT_APP_URL;
@@ -81,7 +80,7 @@ export default class Trip extends Component {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({
           trip: res.data.trip,
           activities: res.data.trip.activities,
@@ -103,12 +102,12 @@ export default class Trip extends Component {
   };
 
   submitHandler = () => {
-    console.log(this.state);
+    // console.log(this.state);
     Axios.post(`${URL}/activities`, this.state, {
       headers: { "x-auth-token": localStorage.token },
     })
       .then((res) => {
-        console.log("done");
+        // console.log("done");
       })
       .catch((err) => {
         console.log(err);
@@ -117,9 +116,9 @@ export default class Trip extends Component {
 
   addActivity = (activity) => {
     this.setState({ activities: [...this.state.activities, activity] });
-    console.log(
-      "activities added to trip.state.activities " + JSON.stringify(activity)
-    );
+    // console.log(
+    //   "activities added to trip.state.activities " + JSON.stringify(activity)
+    // );
   };
 
   render() {

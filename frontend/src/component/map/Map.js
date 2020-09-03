@@ -1,10 +1,9 @@
-
 import React from "react";
 import {
   withGoogleMap,
   GoogleMap,
   withScriptjs,
-  InfoWindow,
+  // InfoWindow,
   Marker,
 } from "react-google-maps";
 import Autocomplete from "react-google-autocomplete";
@@ -180,8 +179,8 @@ class Map extends React.Component {
    */
 
   render() {
-    console.log("lat", this.state.place.mapPosition.lat);
-    console.log("lng", this.state.place.mapPosition.lng);
+    // console.log("lat", this.state.place.mapPosition.lat);
+    // console.log("lng", this.state.place.mapPosition.lng);
     // console.log("place", this.state.place.mapPosition);
 
     const AsyncMap = withScriptjs(
