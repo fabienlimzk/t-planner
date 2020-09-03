@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/fabienlimzk.github.io/t-planner/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/fabienlimzk.github.io/t-planner/static/js/main.ceaff3d8.chunk.js",
-    "main.js.map": "/fabienlimzk.github.io/t-planner/static/js/main.ceaff3d8.chunk.js.map",
-    "runtime-main.js": "/fabienlimzk.github.io/t-planner/static/js/runtime-main.5f0108a7.js",
-    "runtime-main.js.map": "/fabienlimzk.github.io/t-planner/static/js/runtime-main.5f0108a7.js.map",
-    "static/css/2.11829350.chunk.css": "/fabienlimzk.github.io/t-planner/static/css/2.11829350.chunk.css",
-    "static/js/2.c8d61fff.chunk.js": "/fabienlimzk.github.io/t-planner/static/js/2.c8d61fff.chunk.js",
-    "static/js/2.c8d61fff.chunk.js.map": "/fabienlimzk.github.io/t-planner/static/js/2.c8d61fff.chunk.js.map",
-    "index.html": "/fabienlimzk.github.io/t-planner/index.html",
-    "precache-manifest.71efc73d8f2956e9cfbf33ce4f11653f.js": "/fabienlimzk.github.io/t-planner/precache-manifest.71efc73d8f2956e9cfbf33ce4f11653f.js",
-    "service-worker.js": "/fabienlimzk.github.io/t-planner/service-worker.js",
-    "static/css/2.11829350.chunk.css.map": "/fabienlimzk.github.io/t-planner/static/css/2.11829350.chunk.css.map",
-    "static/css/main.5ecd60fb.chunk.css.map": "/fabienlimzk.github.io/t-planner/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.c8d61fff.chunk.js.LICENSE.txt": "/fabienlimzk.github.io/t-planner/static/js/2.c8d61fff.chunk.js.LICENSE.txt"
+    "main.css": "/t-planner/static/css/main.5ecd60fb.chunk.css",
+    "main.js": "/t-planner/static/js/main.266f9775.chunk.js",
+    "main.js.map": "/t-planner/static/js/main.266f9775.chunk.js.map",
+    "runtime-main.js": "/t-planner/static/js/runtime-main.13aadab9.js",
+    "runtime-main.js.map": "/t-planner/static/js/runtime-main.13aadab9.js.map",
+    "static/css/2.11829350.chunk.css": "/t-planner/static/css/2.11829350.chunk.css",
+    "static/js/2.33d285ac.chunk.js": "/t-planner/static/js/2.33d285ac.chunk.js",
+    "static/js/2.33d285ac.chunk.js.map": "/t-planner/static/js/2.33d285ac.chunk.js.map",
+    "index.html": "/t-planner/index.html",
+    "precache-manifest.5ae86ca19088cf368a54ec2d53a7601a.js": "/t-planner/precache-manifest.5ae86ca19088cf368a54ec2d53a7601a.js",
+    "service-worker.js": "/t-planner/service-worker.js",
+    "static/css/2.11829350.chunk.css.map": "/t-planner/static/css/2.11829350.chunk.css.map",
+    "static/css/main.5ecd60fb.chunk.css.map": "/t-planner/static/css/main.5ecd60fb.chunk.css.map",
+    "static/js/2.33d285ac.chunk.js.LICENSE.txt": "/t-planner/static/js/2.33d285ac.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.5f0108a7.js",
+    "static/js/runtime-main.13aadab9.js",
     "static/css/2.11829350.chunk.css",
-    "static/js/2.c8d61fff.chunk.js",
+    "static/js/2.33d285ac.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.ceaff3d8.chunk.js"
+    "static/js/main.266f9775.chunk.js"
   ]
 }
