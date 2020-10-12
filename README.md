@@ -1,6 +1,9 @@
-## Introduction
-SEI 23 - Project 4 
-Fullstack App is hosted here: https://xx
+# Project Four - T-Planner
+Fullstack App is hosted [here](https://sei23-t-planner.herokuapp.com/)
+
+#### Team Members
+- [Fabien Lim Zheng Kai](https://github.com/fabienlimzk)
+- [Randall Lim](https://github.com/randallalala)
 
 #### Database Objectives
 - Database can be populated with various items and respective prices 
@@ -19,7 +22,6 @@ Your app should:
 - Use a database or way to store your data, whether that's one we've covered in class or one you want to learn
 - Have an interactive front-end
  
-
 ## Breakdown
 #### Minimum Viable Product Features
 - Models: 
@@ -32,16 +34,13 @@ Your app should:
 - Activities can have timeslot and description
 - Users can create a packing list sort of like a “todo-list”
 
-
 #### Furthers
 - Geolocation api ()
 - Calendar api 
 - Attractions api 
-- Can add friends and contribute together
-
-  
-#### Database Design
-<img src="">
+- Can add friends and contribute together 
+<!-- #### Database Design
+<img src=""> -->
 
 #### Technologies used:
 - Express
@@ -52,9 +51,3 @@ Your app should:
 - MongoDB
 - Heroku
 - Axios
-
-#### Bugs & Issues Faced
--  
-
-#### Further Possible Improvements
-- 
